@@ -17,15 +17,11 @@
 
 <body class="flex flex-col min-h-screen">
 
-
-
-
-
   <!-- Header -->
   <header class="bg-gray-800 text-white p-4">
-    <div class="container mx-auto flex justify-between items-center">
+    <div class="container mx-auto flex justify-center items-center"> <!-- Center the content -->
       <img src="assets/logo.png" alt="Company Logo" class="h-10">
-      <h1 class="text-2xl font-bold">Mobile Web App</h1>
+      <!-- Remove the title -->
     </div>
   </header>
 
@@ -48,12 +44,16 @@
       <ul class="flex space-x-4">
         <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
         <li><a href="catalog.html" class="hover:text-gray-300">Catalog</a></li>
-        <li><a href="profile.html" class="hover:text-gray-300">Profile</a></li>
+  <footer class="bg-gray-800 text-white p-10">
+    <div class="container mx-auto flex justify-evenly">
+      <nav class="flex space-x-4">
+        <a href="index.html" class="btn-nav">Home</a>
+        <a href="catalog.html" class="btn-nav">Catalog</a>
+        <a href="profile.html" class="btn-nav">Profile</a>
         <!-- Add more navigation links dynamically -->
-      </ul>
+      </nav>
     </div>
   </footer>
-
 
   <!-- Your JavaScript files -->
   <script src="config.json"></script>
