@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Set banner text
-      const bannerTextElement = document.querySelector('.bg-blue-200 h2');
+      const bannerTextElement = document.getElementById('bannerText');
       if (bannerTextElement) {
         bannerTextElement.textContent = config.header.bannerText;
       }

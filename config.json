@@ -1,4 +1,3 @@
-// config.json
 {
   "header": {
     "logo": "assets/logo.png",
@@ -24,6 +23,6 @@
   "colors": {
     "headerColor": "#000000",
     "footerColor": "#000000",
-    "bannerColor": "#4299e1"
+    "bannerColor": "#197049"
   }
 }
