@@ -5,15 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch('config.json')
     .then(response => response.json())
     .then(config => {
-      console.log('Config:', config); // Log the entire config object for debugging
-
       // Set logo in header
       const logoImg = document.querySelector('header img');
       if (logoImg) {
         logoImg.src = config.header.logo;
         logoImg.alt = "Company Logo";
       }
-
 
       // Apply header color
       const header = document.querySelector('header');
@@ -31,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const bannerTextElement = document.getElementById('bannerText');
       if (bannerTextElement) {
         bannerTextElement.textContent = config.header.bannerText;
+        bannerTextElement.style.color = config.colors.bannerTextColor; // Apply banner text color from config
       }
 
       // Apply banner color
@@ -63,18 +61,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
       products.forEach(product => {
         const productCard = `
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-              <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover object-center">
-              <div class="p-4">
-                <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
-                <p class="text-gray-700">${product.description}</p>
-                <div class="mt-4 flex items-center justify-between">
-                  <span class="text-xl font-bold">$${product.price}</span>
-                  <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
-                </div>
+          <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover object-center">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
+              <p class="text-gray-700">${product.description}</p>
+              <div class="mt-4 flex items-center justify-between">
+                <span class="text-xl font-bold">$${product.price}</span>
+                <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
               </div>
             </div>
-          `;
+          </div>
+        `;
 
         productGrid.insertAdjacentHTML('beforeend', productCard);
       });
