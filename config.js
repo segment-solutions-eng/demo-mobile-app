@@ -25,6 +25,7 @@ const config = {
         headerColor: "#000000",
         footerColor: "#000000",
         bannerColor: "#197049",
-        bannerTextColor: "#FFFFFF"
+        bannerTextColor: "#FFFFFF",
+        buttonColor: "#197049"
     }
 };

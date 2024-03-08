@@ -1,9 +1,8 @@
 // script.js
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Fetch configuration
-  // const config = require('./config.js');
-  // const products = require('./products.js');
+
+
 
   // Set logo in header
   const logoImg = document.querySelector('header img');
@@ -63,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <p class="text-gray-700">${product.description}</p>
             <div class="mt-4 flex items-center justify-between">
               <span class="text-xl font-bold">$${product.price}</span>
-              <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
+              <button style="background-color: ${config.colors.buttonColor}" class="hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
             </div>
           </div>
         </div>
