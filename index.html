@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,29 +14,52 @@
   <!-- Your custom CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <!-- Navbar -->
-  <nav class="bg-gray-800 text-white p-4">
+
+<body class="flex flex-col min-h-screen">
+
+
+
+
+
+  <!-- Header -->
+  <header class="bg-gray-800 text-white p-4">
     <div class="container mx-auto flex justify-between items-center">
+      <img src="assets/logo.png" alt="Company Logo" class="h-10">
       <h1 class="text-2xl font-bold">Mobile Web App</h1>
-      <ul class="flex space-x-4">
-        <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
-        <li><a href="catalog.html" class="hover:text-gray-300">Catalog</a></li>
-        <li><a href="profile.html" class="hover:text-gray-300">Profile</a></li>
-        <!-- Add more links for other pages -->
-      </ul>
     </div>
-  </nav>
+  </header>
+
+  <!-- Banner -->
+  <div class="bg-blue-200 p-4">
+    <div class="container mx-auto">
+      <h2 class="text-xl font-semibold">{{bannerText}}</h2>
+    </div>
+  </div>
 
   <!-- Content -->
-  <div class="container mx-auto mt-8">
+  <div class="container mx-auto mt-8 flex-grow">
     <h2 class="text-3xl font-bold">Featured Products</h2>
     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6"></div>
   </div>
 
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white p-4">
+    <div class="container mx-auto flex justify-center">
+      <ul class="flex space-x-4">
+        <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+        <li><a href="catalog.html" class="hover:text-gray-300">Catalog</a></li>
+        <li><a href="profile.html" class="hover:text-gray-300">Profile</a></li>
+        <!-- Add more navigation links dynamically -->
+      </ul>
+    </div>
+  </footer>
+
 
   <!-- Your JavaScript files -->
+  <script src="config.json"></script>
   <script src="products.json"></script>
   <script src="script.js"></script>
+
 </body>
+
 </html>

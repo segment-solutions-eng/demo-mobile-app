@@ -1,0 +1,14 @@
+{
+  "header": {
+    "logo": "assets/logo.png",
+    "bannerText": "Welcome to our mobile app!"
+  },
+  "footer": {
+    "navLinks": [
+      { "label": "Home", "url": "#" },
+      { "label": "Catalog", "url": "#" },
+      { "label": "Profile", "url": "#" }
+      // Add more navigation links as needed
+    ]
+  }
+}
