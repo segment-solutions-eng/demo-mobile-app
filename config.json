@@ -1,3 +1,4 @@
+// config.json
 {
   "header": {
     "logo": "assets/logo.png",
@@ -19,5 +20,10 @@
       }
       // Add more navigation links as needed
     ]
+  },
+  "colors": {
+    "headerColor": "#000000",
+    "footerColor": "#000000",
+    "bannerColor": "#4299e1"
   }
 }

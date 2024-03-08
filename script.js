@@ -18,6 +18,24 @@ document.addEventListener("DOMContentLoaded", function () {
         bannerTextElement.textContent = config.header.bannerText;
       }
 
+      // Apply header color
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.backgroundColor = config.colors.headerColor;
+      }
+
+      // Apply footer color
+      const footer = document.querySelector('footer');
+      if (footer) {
+        footer.style.backgroundColor = config.colors.footerColor;
+      }
+
+      // Apply banner color
+      const banner = document.querySelector('.bg-blue-200');
+      if (banner) {
+        banner.style.backgroundColor = config.colors.bannerColor;
+      }
+
       // Populate footer navigation links
       const footerNav = document.querySelector('footer ul');
       if (footerNav) {
