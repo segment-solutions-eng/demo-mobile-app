@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Product 1",
-    "image": "product1.jpg",
+    "image": "assets/product1.avif",
     "description": "Description of Product 1",
     "price": 49.99,
     "actionButtonTitle": "Add to Cart"
@@ -10,7 +10,7 @@
   {
     "id": 2,
     "name": "Product 2",
-    "image": "product2.jpg",
+    "image": "assets/product2.avif",
     "description": "Description of Product 2",
     "price": 59.99,
     "actionButtonTitle": "Learn More"
@@ -18,7 +18,7 @@
   {
     "id": 3,
     "name": "Product 3",
-    "image": "product3.jpg",
+    "image": "assets/product3.avif",
     "description": "Description of Product 3",
     "price": 39.99,
     "actionButtonTitle": "Submit Application"
@@ -26,7 +26,7 @@
   {
     "id": 4,
     "name": "Product 4",
-    "image": "product4.jpg",
+    "image": "assets/product4.avif",
     "description": "Description of Product 4",
     "price": 69.99,
     "actionButtonTitle": "Next"
