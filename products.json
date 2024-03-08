@@ -4,27 +4,31 @@
     "name": "Product 1",
     "image": "product1.jpg",
     "description": "Description of Product 1",
-    "price": 49.99
+    "price": 49.99,
+    "actionButtonTitle": "Add to Cart"
   },
   {
     "id": 2,
     "name": "Product 2",
     "image": "product2.jpg",
     "description": "Description of Product 2",
-    "price": 59.99
+    "price": 59.99,
+    "actionButtonTitle": "Learn More"
   },
   {
     "id": 3,
     "name": "Product 3",
     "image": "product3.jpg",
     "description": "Description of Product 3",
-    "price": 39.99
+    "price": 39.99,
+    "actionButtonTitle": "Submit Application"
   },
   {
     "id": 4,
     "name": "Product 4",
     "image": "product4.jpg",
     "description": "Description of Product 4",
-    "price": 69.99
+    "price": 69.99,
+    "actionButtonTitle": "Next"
   }
 ]

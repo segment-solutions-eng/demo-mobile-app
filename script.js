@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p class="text-gray-700">${product.description}</p>
                 <div class="mt-4 flex items-center justify-between">
                   <span class="text-xl font-bold">$${product.price}</span>
-                  <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded-full">Add to Cart</button>
+                  <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
                 </div>
               </div>
             </div>
