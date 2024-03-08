@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch('config.json')
     .then(response => response.json())
     .then(config => {
+      console.log('Config:', config); // Log the entire config object for debugging
+
       // Set logo in header
       const logoImg = document.querySelector('header img');
       if (logoImg) {
@@ -12,11 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
         logoImg.alt = "Company Logo";
       }
 
-      // Set banner text
-      const bannerTextElement = document.getElementById('bannerText');
-      if (bannerTextElement) {
-        bannerTextElement.textContent = config.header.bannerText;
-      }
 
       // Apply header color
       const header = document.querySelector('header');
@@ -28,6 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const footer = document.querySelector('footer');
       if (footer) {
         footer.style.backgroundColor = config.colors.footerColor;
+      }
+
+      // Set banner text
+      const bannerTextElement = document.getElementById('bannerText');
+      if (bannerTextElement) {
+        bannerTextElement.textContent = config.header.bannerText;
       }
 
       // Apply banner color
