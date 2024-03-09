@@ -120,21 +120,21 @@ function renderProducts() {
 function createProductCard(product) {
   // Dynamically create the product card with flex layout to keep the price and button anchored at the bottom
   return `
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
-            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
-            <div class="p-4 flex flex-1 flex-col justify-between">
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
-                    <p class="text-gray-700 mb-4">${product.description}</p>
-                </div>
-                <div class="flex items-center justify-between">
-                    <span class="text-xl font-bold">${product.price}</span>
-                    <button data-product-id="${product.id}" style="background-color: ${config.colors.buttonColor};" class="action-button hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
-                </div>
-            </div>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+      <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+      <div class="p-4 flex flex-1 flex-col justify-between">
+        <div>
+          <h3 class="text-xl text-center font-semibold mb-2">${product.name}</h3>
         </div>
-    `;
+        <div class="flex items-center justify-between">
+          <span class="text-lg font-bold">${product.price}</span>
+          <button data-product-id="${product.id}" style="background-color: ${config.colors.buttonColor};" class="action-button hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
+        </div>
+      </div>
+    </div>
+  `;
 }
+
 
 
 function setupModalEventListeners() {
