@@ -2,6 +2,7 @@
 
 const products = [
     {
+        id: "1",
         name: "Product 1",
         description: "Description of product 1",
         price: 10.99,
@@ -11,6 +12,7 @@ const products = [
         intentButtonLabel: "Proceed",
     },
     {
+        id: "2",
         name: "Product 2",
         description: "Description of product 2",
         price: 19.99,
@@ -20,6 +22,7 @@ const products = [
         intentButtonLabel: "Proceed",
     },
     {
+        id: "3",
         name: "Product 3",
         image: "assets/product3.avif",
         description: "Description of Product 3",
@@ -29,6 +32,7 @@ const products = [
         intentButtonLabel: "Proceed",
     },
     {
+        id: "4",
         name: "Product 4",
         image: "assets/product4.avif",
         description: "Description of Product 4",

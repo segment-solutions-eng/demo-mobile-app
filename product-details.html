@@ -38,24 +38,31 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Get the product ID from the query parameter
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
+            const product = products.find(p => p.detailsPageUrl.includes(productId));
 
-            // Find the product details from the products array
-            const product = products.find(p => p.id === productId);
+            if (product) {
+                // Assuming you have a container with id="productDetails" to show the product info
+                const productDetailsElement = document.getElementById('productDetails');
+                if (productDetailsElement) {
+                    productDetailsElement.innerHTML = `
+                <h2 class="text-2xl font-semibold">${product.name}</h2>
+                <p class="text-gray-700">${product.description}</p>
+                <p class="text-xl font-bold">$${product.price}</p>
+            `;
+                }
 
-            // Display product details
-            const productDetailsElement = document.getElementById('productDetails');
-            if (product && productDetailsElement) {
-                productDetailsElement.innerHTML = `
-                    <h2 class="text-2xl font-semibold">${product.name}</h2>
-                    <p class="text-gray-700">${product.description}</p>
-                    <p class="text-xl font-bold">$${product.price}</p>
-                `;
+                // Set the action button label dynamically
+                const actionButton = document.getElementById('advanceButton');
+                if (actionButton) {
+                    actionButton.textContent = product.intentButtonLabel;
+                }
             }
         });
     </script>
+
+
 </body>
 
 </html>
