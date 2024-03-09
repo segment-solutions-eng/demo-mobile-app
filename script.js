@@ -238,7 +238,7 @@ function hideProductDetailsModal() {
 function loadHomePageContent() {
   const content = `
     <div class="container mx-auto mt-8 flex-grow">
-      <h2 class="text-3xl font-bold text-center">Home</h2>
+      <h2 class="text-2xl font-bold mb-4 text-center px-4 py-2 bg-gray-100 rounded-lg shadow">Home</h2>
       <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
         <!-- Catalog items will be loaded here -->
       </div>
@@ -252,7 +252,7 @@ function loadHomePageContent() {
 function loadCatalogContent() {
   const content = `
     <div class="container mx-auto mt-8 flex-grow">
-      <h2 class="text-3xl font-bold text-center">Catalog</h2>
+      <h2 class="text-2xl font-bold mb-4 text-center px-4 py-2 bg-gray-100 rounded-lg shadow">Catalog</h2>
       <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
         <!-- Catalog items will be loaded here -->
       </div>
@@ -262,21 +262,27 @@ function loadCatalogContent() {
   renderProducts(); // Assuming this function renders your products
 }
 
-// Resources Page
 function loadResourcesContent() {
   const content = document.getElementById('main-content');
-  content.innerHTML = '<div class="text-xl font-semibold mb-4 text-center px-4">Resources</div>';
+  // Reset the inner HTML to include a consistent outer structure
+  content.innerHTML = `
+    <div class="container mx-auto mt-8 flex-grow">
+      <h2 class="text-2xl font-bold mb-4 text-center px-4 py-2 bg-gray-100 rounded-lg shadow">Resources</h2>
+      <div id="accordionContainer" class="flex flex-col divide-y divide-gray-200 mx-4">
+        <!-- Accordion items will be dynamically added here -->
+      </div>
+    </div>
+  `;
 
-  const accordionContainer = document.createElement('div');
-  accordionContainer.className = 'flex flex-col divide-y divide-gray-200 mx-4';
+  const accordionContainer = document.getElementById('accordionContainer'); // Get the newly added accordion container
 
-  config.resources.forEach((category, index) => {
+  config.resources.forEach((category) => {
     const categoryHeader = document.createElement('button');
     categoryHeader.innerHTML = `<span class="accordion-title">${category.category}</span> <span class="indicator">+</span>`;
     categoryHeader.className = 'accordion-header py-4 px-6 text-left text-lg font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-150 ease-in-out rounded-md shadow-sm my-2 flex justify-between items-center';
 
     const categoryContent = document.createElement('div');
-    categoryContent.className = 'accordion-content overflow-hidden transition-max-height duration-700 ease-[cubic-bezier(0.4, 0.0, 0.2, 1)]';
+    categoryContent.className = 'accordion-content overflow-hidden transition-max-height duration-700 ease-in-out';
     categoryContent.style.maxHeight = '0';
 
     category.items.forEach((item) => {
@@ -287,7 +293,7 @@ function loadResourcesContent() {
       categoryContent.appendChild(itemElement);
     });
 
-    categoryHeader.addEventListener('click', function () {
+    categoryHeader.addEventListener('click', () => {
       const expanded = categoryContent.style.maxHeight !== '0px';
       categoryContent.style.maxHeight = expanded ? '0' : `${categoryContent.scrollHeight}px`;
       categoryHeader.querySelector('.indicator').textContent = expanded ? '+' : '-';
@@ -296,9 +302,8 @@ function loadResourcesContent() {
     accordionContainer.appendChild(categoryHeader);
     accordionContainer.appendChild(categoryContent);
   });
-
-  content.appendChild(accordionContainer);
 }
+
 
 
 
@@ -307,7 +312,7 @@ function loadResourcesContent() {
 function loadProfileContent() {
   const content = `
     <div class="container mx-auto mt-8 flex-grow">
-      <h2 class="text-3xl font-bold text-center">Profile</h2>
+      <h2 class="text-2xl font-bold mb-4 text-center px-4 py-2 bg-gray-100 rounded-lg shadow">Profile</h2>
       <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
         <!-- Catalog items will be loaded here -->
       </div>
