@@ -9,15 +9,23 @@ const config = {
         navLinks: [
             {
                 label: "Home",
-                url: "#"
+                url: "#",
+                icon: "fas fa-home"
             },
             {
                 label: "Catalog",
-                url: "catalog.html"
+                url: "#",
+                icon: "fas fa-th-large"
+            },
+            {
+                label: "Resources",
+                url: "resources.html",
+                icon: "fas fa-book"
             },
             {
                 label: "Profile",
-                url: "profile.html"
+                url: "profile.html",
+                icon: "fas fa-user"
             }
         ]
     },

@@ -8,8 +8,9 @@ const products = [
         price: 10.99,
         image: "assets/product1.avif",
         actionButtonTitle: "Add to Cart",
-        detailsPageUrl: "product-details.html?id=1",
-        intentButtonLabel: "Proceed",
+        tags: ["New Arrival", "Bestseller"],
+        features: ["Feature 1", "Feature 2", "Feature 3"],
+        intentButtonLabel: "Buy Now"
     },
     {
         id: "2",
@@ -18,8 +19,9 @@ const products = [
         price: 19.99,
         image: "assets/product2.avif",
         actionButtonTitle: "Learn More",
-        detailsPageUrl: "product-details.html?id=2",
-        intentButtonLabel: "Proceed",
+        tags: ["New Arrival", "Bestseller"],
+        features: ["Feature 1", "Feature 2", "Feature 3"],
+        intentButtonLabel: "Proceed"
     },
     {
         id: "3",
@@ -28,8 +30,9 @@ const products = [
         description: "Description of Product 3",
         price: 39.99,
         actionButtonTitle: "Submit Application",
-        detailsPageUrl: "product-details.html?id=3",
-        intentButtonLabel: "Proceed",
+        tags: ["New Arrival", "Bestseller"],
+        features: ["Feature 1", "Feature 2", "Feature 3"],
+        intentButtonLabel: "Proceed"
     },
     {
         id: "4",
@@ -38,7 +41,8 @@ const products = [
         description: "Description of Product 4",
         price: 69.99,
         actionButtonTitle: "Next",
-        detailsPageUrl: "product-details.html?id=4",
-        intentButtonLabel: "Proceed",
+        tags: ["New Arrival", "Bestseller"],
+        features: ["Feature 1", "Feature 2", "Feature 3"],
+        intentButtonLabel: "Proceed"
     }
 ];
