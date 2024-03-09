@@ -37,10 +37,26 @@ const config = {
         buttonColor: "#197049"
     },
     resources: [
-        { title: "Resource 1", url: "https://example.com/resource1", description: "Description of Resource 1" },
-        { title: "Resource 2", url: "https://example.com/resource2", description: "Description of Resource 2" },
-        { title: "Resource 3", url: "https://example.com/resource2", description: "Description of Resource 3" },
-        { title: "Resource 4", url: "https://example.com/resource2", description: "Description of Resource 4" },
-        { title: "Resource 5", url: "https://example.com/resource2", description: "Description of Resource 5" }
+        {
+            category: "Development Tools",
+            items: [
+                { title: "Visual Studio Code", url: "https://code.visualstudio.com/", description: "Free. Built on open source. Runs everywhere." },
+                { title: "GitHub", url: "https://github.com/", description: "GitHub is where over 65 million developers shape the future of software, together." }
+            ]
+        },
+        {
+            category: "Design Resources",
+            items: [
+                { title: "Figma", url: "https://www.figma.com/", description: "Figma helps teams create, test, and ship better designs from start to finish." },
+                { title: "Adobe XD", url: "https://www.adobe.com/products/xd.html", description: "XD is your UI/UX design solution for designing websites and mobile apps." }
+            ]
+        },
+        {
+            category: "Educational Platforms",
+            items: [
+                { title: "Coursera", url: "https://www.coursera.org/", description: "Coursera offers online courses from top universities." },
+                { title: "Udemy", url: "https://www.udemy.com/", description: "An online learning and teaching marketplace with over 130,000 courses." }
+            ]
+        }
     ]
 };

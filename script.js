@@ -3,7 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
   renderProducts();
   setupModalEventListeners(); //Product Detail Modal
   setupConfirmationModalListeners(); //Confirmation Window Modal
-  loadHomePageContent();
+
+  const currentHash = window.location.hash.substring(1); // Get the current hash, removing the '#'
+  if (currentHash) {
+    loadContent(currentHash); // Load the content if there is a hash
+  } else {
+    loadHomePageContent(); // Default to home content if no hash
+  }
 });
 
 function applyConfigurations() {
@@ -62,26 +68,12 @@ function populateFooterNavigation() {
 
       // Attach an event listener to each anchor for dynamic content loading
       anchor.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent the default anchor action
+        e.preventDefault(); // Prevent default anchor action
         const target = link.url.substring(1); // Remove the '#' from the URL
-
-        switch (target) {
-          case 'home':
-            loadHomePageContent(); // Function to load the home content
-            break;
-          case 'catalog':
-            loadCatalogContent(); // Adjust these functions as necessary
-            break;
-          case 'resources':
-            // loadResourcesContent();
-            break;
-          case 'profile':
-            // loadProfileContent();
-            break;
-          default:
-            loadHomePageContent(); // Default to home if no match
-        }
+        window.location.hash = target; // Update the URL hash
+        loadContent(target); // Load the content based on the target
       });
+
 
       footerNav.appendChild(anchor);
     });
@@ -90,11 +82,9 @@ function populateFooterNavigation() {
 
 
 function loadContent(contentId) {
-  // Implement content loading logic here
-  // For example:
   switch (contentId) {
     case 'home':
-      loadHomeContent();
+      loadHomePageContent();
       break;
     case 'catalog':
       loadCatalogContent();
@@ -106,9 +96,10 @@ function loadContent(contentId) {
       loadProfileContent();
       break;
     default:
-      console.error('Unknown content ID:', contentId);
+      loadHomePageContent(); // Load home by default or show a 404 page/content not found message
   }
 }
+
 
 // Define functions like loadHomeContent, loadCatalogContent, etc., to update the #main-content
 
@@ -273,17 +264,44 @@ function loadCatalogContent() {
 
 // Resources Page
 function loadResourcesContent() {
-  const content = `
-    <div class="container mx-auto mt-8 flex-grow">
-      <h2 class="text-3xl font-bold text-center">Resources</h2>
-      <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
-        <!-- Catalog items will be loaded here -->
-      </div>
-    </div>
-  `;
-  document.getElementById('main-content').innerHTML = content;
+  const content = document.getElementById('main-content');
+  content.innerHTML = '<div class="text-xl font-semibold mb-4 text-center px-4">Resources</div>';
 
+  const accordionContainer = document.createElement('div');
+  accordionContainer.className = 'flex flex-col divide-y divide-gray-200 mx-4';
+
+  config.resources.forEach((category, index) => {
+    const categoryHeader = document.createElement('button');
+    categoryHeader.innerHTML = `<span class="accordion-title">${category.category}</span> <span class="indicator">+</span>`;
+    categoryHeader.className = 'accordion-header py-4 px-6 text-left text-lg font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-150 ease-in-out rounded-md shadow-sm my-2 flex justify-between items-center';
+
+    const categoryContent = document.createElement('div');
+    categoryContent.className = 'accordion-content overflow-hidden transition-max-height duration-700 ease-[cubic-bezier(0.4, 0.0, 0.2, 1)]';
+    categoryContent.style.maxHeight = '0';
+
+    category.items.forEach((item) => {
+      const itemElement = document.createElement('div');
+      itemElement.className = 'pl-10 p-4 hover:bg-gray-50';
+      itemElement.innerHTML = `<a href="${item.url}" target="_blank" class="text-blue-600 hover:underline">${item.title}</a>
+                               <p class="text-gray-600">${item.description}</p>`;
+      categoryContent.appendChild(itemElement);
+    });
+
+    categoryHeader.addEventListener('click', function () {
+      const expanded = categoryContent.style.maxHeight !== '0px';
+      categoryContent.style.maxHeight = expanded ? '0' : `${categoryContent.scrollHeight}px`;
+      categoryHeader.querySelector('.indicator').textContent = expanded ? '+' : '-';
+    });
+
+    accordionContainer.appendChild(categoryHeader);
+    accordionContainer.appendChild(categoryContent);
+  });
+
+  content.appendChild(accordionContainer);
 }
+
+
+
 
 // Profile Page
 function loadProfileContent() {
@@ -297,19 +315,4 @@ function loadProfileContent() {
   `;
   document.getElementById('main-content').innerHTML = content;
 
-}
-
-// Function to populate the resources section with links and descriptions
-function populateResources() {
-  const resourcesList = document.getElementById('resources-list');
-  if (resourcesList) {
-    config.resources.forEach(resource => {
-      const listItem = document.createElement('li');
-      listItem.innerHTML = `
-        <a href="${resource.url}" class="text-blue-500 font-semibold">${resource.title}</a>
-        <p class="text-gray-700">${resource.description}</p>
-      `;
-      resourcesList.appendChild(listItem);
-    });
-  }
 }
