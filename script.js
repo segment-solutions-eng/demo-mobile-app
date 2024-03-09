@@ -1,9 +1,4 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", function () {
-
-
-
   // Set logo in header
   const logoImg = document.querySelector('header img');
   if (logoImg) {
@@ -62,12 +57,34 @@ document.addEventListener("DOMContentLoaded", function () {
             <p class="text-gray-700">${product.description}</p>
             <div class="mt-4 flex items-center justify-between">
               <span class="text-xl font-bold">$${product.price}</span>
-              <button style="background-color: ${config.colors.buttonColor}" class="hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
+              <button data-product-id="${product.id}" style="background-color: ${config.colors.buttonColor}" class="action-button hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
             </div>
           </div>
         </div>
       `;
       productGrid.insertAdjacentHTML('beforeend', productCard);
     });
+
+    // Add click event listener to action buttons
+    const actionButtons = document.querySelectorAll('.action-button');
+    actionButtons.forEach(button => {
+      button.addEventListener('click', handleActionButtonClick);
+    });
+  }
+
+  // Add event listener to the cancel button
+  const cancelButton = document.getElementById('cancelButton');
+  if (cancelButton) {
+    cancelButton.addEventListener('click', function () {
+      // Navigate to the home page
+      window.location.href = 'index.html'; // Update the URL as per your home page URL
+    });
   }
 });
+
+// Function to handle clicking on the action button
+function handleActionButtonClick(event) {
+  const productId = event.target.dataset.productId;
+  // Redirect to the Product Details page with the corresponding product ID
+  window.location.href = `product-details.html?id=${productId}`;
+}
