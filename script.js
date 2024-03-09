@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   renderProducts();
   setupModalEventListeners(); //Product Detail Modal
   setupConfirmationModalListeners(); //Confirmation Window Modal
+  loadHomePageContent();
 });
 
 function applyConfigurations() {
@@ -59,31 +60,83 @@ function populateFooterNavigation() {
       anchor.className = 'w-full h-full flex';
       anchor.appendChild(div); // Append the div to anchor for the entire area to be clickable
 
+      // Attach an event listener to each anchor for dynamic content loading
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent the default anchor action
+        const target = link.url.substring(1); // Remove the '#' from the URL
+
+        switch (target) {
+          case 'home':
+            loadHomePageContent(); // Function to load the home content
+            break;
+          case 'catalog':
+            loadCatalogContent(); // Adjust these functions as necessary
+            break;
+          case 'resources':
+            // loadResourcesContent();
+            break;
+          case 'profile':
+            // loadProfileContent();
+            break;
+          default:
+            loadHomePageContent(); // Default to home if no match
+        }
+      });
+
       footerNav.appendChild(anchor);
     });
   }
 }
 
 
+function loadContent(contentId) {
+  // Implement content loading logic here
+  // For example:
+  switch (contentId) {
+    case 'home':
+      loadHomeContent();
+      break;
+    case 'catalog':
+      loadCatalogContent();
+      break;
+    case 'resources':
+      loadResourcesContent();
+      break;
+    case 'profile':
+      loadProfileContent();
+      break;
+    default:
+      console.error('Unknown content ID:', contentId);
+  }
+}
+
+// Define functions like loadHomeContent, loadCatalogContent, etc., to update the #main-content
+
+
 function renderProducts() {
   const productGrid = document.getElementById('productGrid');
   if (productGrid) {
+    productGrid.innerHTML = ''; // Clear existing products if any
     products.forEach(product => {
       const productCard = createProductCard(product);
       productGrid.insertAdjacentHTML('beforeend', productCard);
     });
+    setupModalEventListeners(); // Reattach event listeners to the action buttons
   }
 }
 
+
 function createProductCard(product) {
-  // Dynamically create the action button with a style attribute for the background color
+  // Dynamically create the product card with flex layout to keep the price and button anchored at the bottom
   return `
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover object-center">
-            <div class="p-4">
-                <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
-                <p class="text-gray-700">${product.description}</p>
-                <div class="mt-4 flex items-center justify-between">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+            <div class="p-4 flex flex-1 flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
+                    <p class="text-gray-700 mb-4">${product.description}</p>
+                </div>
+                <div class="flex items-center justify-between">
                     <span class="text-xl font-bold">$${product.price}</span>
                     <button data-product-id="${product.id}" style="background-color: ${config.colors.buttonColor};" class="action-button hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
                 </div>
@@ -92,14 +145,19 @@ function createProductCard(product) {
     `;
 }
 
+
 function setupModalEventListeners() {
   document.querySelectorAll('.action-button').forEach(button => {
-    button.addEventListener('click', function (event) {
-      const productId = event.target.dataset.productId;
-      showProductDetailsModal(productId);
-    });
+    button.removeEventListener('click', handleActionButtonClick); // Remove existing event listener to avoid duplication
+    button.addEventListener('click', handleActionButtonClick); // Add new event listener
   });
 }
+
+function handleActionButtonClick(event) {
+  const productId = event.target.dataset.productId;
+  showProductDetailsModal(productId);
+}
+
 
 function setupConfirmationModalListeners() {
   const confirmModal = document.getElementById('confirmationModal');
@@ -166,4 +224,75 @@ function showProductDetailsModal(productId) {
 
 function hideProductDetailsModal() {
   document.getElementById('productDetailsModal').classList.add('hidden');
+}
+
+// Home Page
+function loadHomePageContent() {
+  const content = `
+    <div class="container mx-auto mt-8 flex-grow">
+      <h2 class="text-3xl font-bold text-center">Home</h2>
+      <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
+        <!-- Catalog items will be loaded here -->
+      </div>
+    </div>
+  `;
+  document.getElementById('main-content').innerHTML = content;
+  renderProducts();
+}
+
+// Catalog Page (same as Home)
+function loadCatalogContent() {
+  const content = `
+    <div class="container mx-auto mt-8 flex-grow">
+      <h2 class="text-3xl font-bold text-center">Catalog</h2>
+      <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
+        <!-- Catalog items will be loaded here -->
+      </div>
+    </div>
+  `;
+  document.getElementById('main-content').innerHTML = content;
+  renderProducts(); // Assuming this function renders your products
+}
+
+// Resources Page
+function loadResourcesContent() {
+  const content = `
+    <div class="container mx-auto mt-8 flex-grow">
+      <h2 class="text-3xl font-bold text-center">Resources</h2>
+      <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
+        <!-- Catalog items will be loaded here -->
+      </div>
+    </div>
+  `;
+  document.getElementById('main-content').innerHTML = content;
+
+}
+
+// Profile Page
+function loadProfileContent() {
+  const content = `
+    <div class="container mx-auto mt-8 flex-grow">
+      <h2 class="text-3xl font-bold text-center">Profile</h2>
+      <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
+        <!-- Catalog items will be loaded here -->
+      </div>
+    </div>
+  `;
+  document.getElementById('main-content').innerHTML = content;
+
+}
+
+// Function to populate the resources section with links and descriptions
+function populateResources() {
+  const resourcesList = document.getElementById('resources-list');
+  if (resourcesList) {
+    config.resources.forEach(resource => {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `
+        <a href="${resource.url}" class="text-blue-500 font-semibold">${resource.title}</a>
+        <p class="text-gray-700">${resource.description}</p>
+      `;
+      resourcesList.appendChild(listItem);
+    });
+  }
 }
