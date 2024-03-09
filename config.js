@@ -13,11 +13,11 @@ const config = {
             },
             {
                 label: "Catalog",
-                url: "#"
+                url: "catalog.html"
             },
             {
                 label: "Profile",
-                url: "#"
+                url: "profile.html"
             }
         ]
     },
