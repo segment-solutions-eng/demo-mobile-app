@@ -51,20 +51,37 @@
 
   <!-- Product Details Modal -->
   <div id="productDetailsModal"
-    class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full flex items-center justify-center">
-    <div class="relative p-5 border w-11/12 md:w-3/4 lg:w-3/4 xl:w-3/4 2xl:max-w-5xl shadow-lg rounded-md bg-white">
-      <div class="text-center">
-        <h3 id="modalProductName" class="text-2xl font-semibold text-gray-900 mt-4"></h3>
-        <img id="modalProductImage" src="" alt="Product Image"
-          class="mx-auto my-4 w-1/2 max-w-xs object-cover rounded-md">
-        <p id="modalProductDescription" class="text-gray-500 my-4"></p>
-        <p id="modalProductPrice" class="text-lg font-semibold text-gray-900 mb-4"></p>
-        <div class="flex justify-center gap-4 mb-4">
-          <!-- Intent and Close buttons will be dynamically inserted here -->
+    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50 flex justify-center items-center">
+    <!-- Modal container -->
+    <div class="relative p-4 bg-white rounded-lg shadow-lg w-full max-w-4xl m-8 mx-auto">
+      <!-- Close button -->
+      <button class="absolute top-0 right-0 mt-4 mr-4" onclick="hideProductDetailsModal()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <!-- Modal content -->
+      <div class="flex flex-wrap md:flex-nowrap">
+        <div class="md:flex-1">
+          <img id="modalProductImage" alt="Product Image" class="object-cover rounded-lg">
+        </div>
+        <div class="md:flex-1 mt-4 md:mt-0 md:ml-4 flex flex-col justify-between">
+          <div>
+            <h3 id="modalProductName" class="text-2xl font-semibold"></h3>
+            <p id="modalProductPrice" class="text-lg"></p>
+            <p id="modalProductDescription" class="mb-4"></p>
+            <div id="modalProductTags" class="mt-4"></div>
+            <ul id="modalProductFeatures" class="list-disc"></ul>
+          </div>
+          <div class="intent-cancel-container space-y-4 mb-4">
+            <!-- Intent and Close buttons will be dynamically inserted here -->
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+
 
   <!-- Confirmation Modal with Tailwind CSS -->
   <div id="confirmationModal"

@@ -189,35 +189,50 @@ function showProductDetailsModal(productId) {
     document.getElementById('modalProductDescription').textContent = product.description;
     document.getElementById('modalProductPrice').textContent = `$${product.price}`;
 
-    // Dynamic Intent and Close Button Implementation
-    const modalFooter = document.querySelector('#productDetailsModal .flex.justify-center.gap-4.mb-4');
-    modalFooter.innerHTML = ''; // Clear existing buttons
+    const modalProductTags = document.getElementById('modalProductTags');
+    modalProductTags.innerHTML = '';
+    product.tags.forEach(tag => {
+      const tagElement = document.createElement('span');
+      tagElement.textContent = tag;
+      tagElement.className = 'inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2';
+      modalProductTags.appendChild(tagElement);
+    });
 
-    // Intent Button
+    const modalProductFeatures = document.getElementById('modalProductFeatures');
+    modalProductFeatures.innerHTML = '';
+    product.features.forEach(feature => {
+      const featureItem = document.createElement('li');
+      featureItem.textContent = feature;
+      modalProductFeatures.appendChild(featureItem);
+    });
+
+    // Clear any existing buttons and add padding between them
+    const buttonContainer = document.querySelector('.intent-cancel-container');
+    buttonContainer.innerHTML = '';
+    buttonContainer.className = 'intent-cancel-container flex flex-col space-y-4 mb-4';
+
+    // Intent Button (e.g., Add to Cart or Buy Now)
     const intentButton = document.createElement('button');
     intentButton.textContent = product.intentButtonLabel;
-    intentButton.className = 'intent-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline';
+    intentButton.className = 'intent-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full';
+    intentButton.style.backgroundColor = config.colors.buttonColor;
     intentButton.addEventListener('click', () => {
-      document.getElementById('productDetailsModal').classList.add('hidden', 'opacity-0');
-      const confirmModal = document.getElementById('confirmationModal');
-      if (confirmModal) {
-        confirmModal.classList.remove('hidden');
-        confirmModal.classList.add('opacity-100');
-      } else {
-        console.error('Confirmation modal not found');
-      }
+      // Show the confirmation modal
+      document.getElementById('productDetailsModal').classList.add('hidden');
+      document.getElementById('confirmationModal').classList.remove('hidden');
     });
 
     // Close Button
     const closeButton = document.createElement('button');
     closeButton.textContent = 'Close';
-    closeButton.className = 'close-button bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline';
+    closeButton.className = 'close-button bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full';
     closeButton.addEventListener('click', hideProductDetailsModal);
 
-    // Append buttons to the modal footer
-    modalFooter.appendChild(intentButton);
-    modalFooter.appendChild(closeButton);
+    // Append buttons to the button container
+    buttonContainer.appendChild(intentButton);
+    buttonContainer.appendChild(closeButton);
 
+    // Show the modal
     document.getElementById('productDetailsModal').classList.remove('hidden');
   }
 }
@@ -225,6 +240,8 @@ function showProductDetailsModal(productId) {
 function hideProductDetailsModal() {
   document.getElementById('productDetailsModal').classList.add('hidden');
 }
+
+
 
 // Home Page
 function loadHomePageContent() {
