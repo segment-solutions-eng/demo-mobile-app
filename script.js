@@ -128,7 +128,7 @@ function createProductCard(product) {
                     <p class="text-gray-700 mb-4">${product.description}</p>
                 </div>
                 <div class="flex items-center justify-between">
-                    <span class="text-xl font-bold">$${product.price}</span>
+                    <span class="text-xl font-bold">${product.price}</span>
                     <button data-product-id="${product.id}" style="background-color: ${config.colors.buttonColor};" class="action-button hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
                 </div>
             </div>
@@ -178,7 +178,7 @@ function showProductDetailsModal(productId) {
     document.getElementById('modalProductName').textContent = product.name;
     document.getElementById('modalProductImage').src = product.image;
     document.getElementById('modalProductDescription').textContent = product.description;
-    document.getElementById('modalProductPrice').textContent = `$${product.price}`;
+    document.getElementById('modalProductPrice').textContent = `${product.price}`;
 
     const modalProductTags = document.getElementById('modalProductTags');
     modalProductTags.innerHTML = '';
@@ -194,8 +194,21 @@ function showProductDetailsModal(productId) {
     product.features.forEach(feature => {
       const featureItem = document.createElement('li');
       featureItem.textContent = feature;
+      featureItem.className = 'feature-item'; // Add class for styling
       modalProductFeatures.appendChild(featureItem);
     });
+
+    // Apply background color to the entire right half of the modal
+    const rightColumn = document.querySelector('#productDetailsModal .right-column');
+    if (rightColumn) {
+      rightColumn.style.backgroundColor = config.colors.modalDetailsBackground;
+    }
+
+    // Apply more padding to the features list
+    const featuresList = document.getElementById('modalProductFeatures');
+    if (featuresList) {
+      featuresList.classList.add('pl-10'); // You can adjust this value as needed
+    }
 
     // Clear any existing buttons and add padding between them
     const buttonContainer = document.querySelector('.intent-cancel-container');
@@ -231,6 +244,8 @@ function showProductDetailsModal(productId) {
 function hideProductDetailsModal() {
   document.getElementById('productDetailsModal').classList.add('hidden');
 }
+
+
 
 
 

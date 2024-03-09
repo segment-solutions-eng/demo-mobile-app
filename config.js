@@ -34,7 +34,8 @@ const config = {
         footerColor: "#000000",
         bannerColor: "#197049",
         bannerTextColor: "#FFFFFF",
-        buttonColor: "#197049"
+        buttonColor: "#197049",
+        modalDetailsBackground: "#EFEFEF"
     },
     resources: [
         {

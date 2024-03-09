@@ -18,3 +18,26 @@
     background-color: #2d3748;
     /* Adjust as needed */
 }
+
+.feature-item {
+    padding-left: 1rem;
+    /* Adjust this value as needed to align the features list */
+}
+
+#productDetailsModal .modal-content {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+#productDetailsModal .left-column {
+    flex: 1;
+    /* ensures that the image column takes up only as much space as it needs */
+}
+
+#productDetailsModal .right-column {
+    flex: 1;
+    /* allows the details column to expand and fill the space */
+    background-color: var(--modal-details-background);
+    /* use a CSS variable or directly input the value */
+}

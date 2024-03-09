@@ -29,16 +29,6 @@
     <!-- Dynamic content will be loaded here -->
   </div>
 
-
-  <!-- Featured Products
-  <div class="mt-32 mb-40 pt-4">
-    <div class="container mx-auto mt-8 flex-grow">
-      <h2 class="text-3xl font-bold">Featured Products</h2>
-      <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6"></div>
-    </div>
-
-  </div> -->
-
   <!-- Footer Navigation Bar -->
   <footer class="fixed inset-x-0 bottom-0 bg-gray-800 text-white p-10">
     <div class="container mx-auto flex justify-evenly">
@@ -51,27 +41,32 @@
 
   <!-- Product Details Modal -->
   <div id="productDetailsModal"
-    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50 flex justify-center items-center">
+    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50 flex justify-center items-start pt-10">
     <!-- Modal container -->
-    <div class="relative p-4 bg-white rounded-lg shadow-lg w-full max-w-4xl m-8 mx-auto">
+    <div class="relative p-4 bg-white rounded-lg shadow-lg w-full max-w-4xl m-8 mx-auto flex flex-col md:flex-row">
       <!-- Close button -->
-      <button class="absolute top-0 right-0 mt-4 mr-4" onclick="hideProductDetailsModal()">
+      <button class="absolute top-0 left-0 mt-4 ml-4" onclick="hideProductDetailsModal()">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
       <!-- Modal content -->
-      <div class="flex flex-wrap md:flex-nowrap">
+      <div class="flex flex-wrap md:flex-nowrap w-full">
+        <!-- Left column for the image -->
         <div class="md:flex-1">
-          <img id="modalProductImage" alt="Product Image" class="object-cover rounded-lg">
+          <img id="modalProductImage" alt="Product Image" class="object-cover rounded-lg w-full md:w-auto">
         </div>
-        <div class="md:flex-1 mt-4 md:mt-0 md:ml-4 flex flex-col justify-between">
+        <!-- Right column for the details -->
+        <div class="md:flex-1 mt-4 md:mt-0 md:ml-4 flex flex-col justify-between bg-gray-200 p-4 rounded-lg">
+          <!-- Tailwind class for background color -->
           <div>
             <h3 id="modalProductName" class="text-2xl font-semibold"></h3>
             <p id="modalProductPrice" class="text-lg"></p>
             <p id="modalProductDescription" class="mb-4"></p>
             <div id="modalProductTags" class="mt-4"></div>
-            <ul id="modalProductFeatures" class="list-disc"></ul>
+            <ul id="modalProductFeatures" class="list-disc pl-10"> <!-- Tailwind class for padding -->
+              <!-- Features will be dynamically inserted here -->
+            </ul>
           </div>
           <div class="intent-cancel-container space-y-4 mb-4">
             <!-- Intent and Close buttons will be dynamically inserted here -->
@@ -80,7 +75,6 @@
       </div>
     </div>
   </div>
-
 
 
   <!-- Confirmation Modal with Tailwind CSS -->
