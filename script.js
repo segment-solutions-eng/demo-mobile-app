@@ -226,7 +226,7 @@ function populateProductDetailsModal(productId) {
     intentButton.className = 'intent-button hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full';
     intentButton.style.backgroundColor = config.colors.buttonColor; // Set button color from config
     intentButton.style.color = '#FFFFFF'; // Optional: Set text color to white
-    intentButton.onclick = () => showConfirmationModal();
+    intentButton.onclick = () => showConfirmationModal(productId);
     buttonContainer.appendChild(intentButton);
 
     // Close Button
@@ -241,9 +241,22 @@ function hideProductDetailsModal() {
     document.getElementById('productDetailsModal').classList.add('hidden');
 }
 
-function showConfirmationModal() {
+// Configure the Confirmation modal
+function showConfirmationModal(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) {
+        console.error('Product not found');
+        return;
+    }
+
+    const confirmBtn = document.getElementById('confirmBtn');
+    if (confirmBtn) {
+        confirmBtn.textContent = product.convertButtonLabel;
+        confirmBtn.dataset.productId = productId; // Store the product ID on the confirm button
+    }
+
     document.getElementById('confirmationModal').classList.remove('hidden');
-    document.getElementById('productDetailsModal').classList.add('hidden'); // Hide product details when showing confirmation
+    document.getElementById('productDetailsModal').classList.add('hidden'); // Hide product details modal
 }
 
 
@@ -251,10 +264,96 @@ function hideConfirmationModal() {
     document.getElementById('confirmationModal').classList.add('hidden');
 }
 
+// Launch Completion and Confirmation Page
+// function confirmAction() {
+//     const confirmBtn = document.getElementById('confirmBtn');
+//     const productId = confirmBtn.dataset.productId;
+//     const product = products.find(p => p.id === productId);
+//     if (!product) {
+//         console.error('Product not found');
+//         return;
+//     }
+
+//     // Show loading icon inside the confirmation modal
+//     const confirmationModalContent = document.querySelector('#confirmationModal .flex-1.flex.flex-col.p-4.bg-gray-200');
+//     confirmationModalContent.innerHTML = `
+//         <div class="loading-container flex justify-center items-center">
+//             <div class="loader"></div> <!-- Add your custom loading icon here -->
+//             <p class="text-center mt-2">Processing...</p>
+//         </div>
+//     `;
+
+//     // Simulate a delay for server response
+//     setTimeout(() => {
+//         // Hide the confirmation modal
+//         hideConfirmationModal();
+
+//         // Update the main content with the confirmation message
+//         const confirmationContent = `
+//             <div class="container mx-auto mt-8 flex-grow">
+//                 <h2 class="text-2xl font-bold mb-4 text-center">Congratulations!</h2>
+//                 <p class="text-lg mb-4 text-center">Your action for "${product.name}" has been confirmed.</p>
+//                 <div class="text-center">
+//                     <img src="${product.image}" alt="${product.name}" class="w-48 mx-auto"/>
+//                     <p class="text-md mt-4">${product.description}</p>
+//                     <p class="text-lg font-bold">${product.price}</p>
+//                 </div>
+//             </div>
+//         `;
+//         document.getElementById('main-content').innerHTML = confirmationContent;
+//     }, 2000); // Adjust the delay as needed, 2000 milliseconds = 2 seconds
+// }
+
+// Trigger COnfirmation
 function confirmAction() {
-    hideConfirmationModal();
-    // Implement action confirmation logic here
+    // Simulate thinking state
+    document.getElementById('confirmBtn').classList.add('hidden');
+    document.getElementById('cancelBtn').classList.add('hidden');
+    document.getElementById('spinner').classList.remove('hidden');
+
+    // Simulate server response delay
+    setTimeout(() => {
+        // Once the "server" has responded, proceed to show the confirmation content
+        completeConfirmation(); // Call a new function to handle the completion of confirmation
+    }, 2000); // Adjust the delay as needed
 }
+
+// Show Confirmation page
+function completeConfirmation() {
+    const productId = document.getElementById('confirmBtn').dataset.productId;
+    const product = products.find(p => p.id === productId);
+    if (!product) {
+        console.error('Product not found');
+        return;
+    }
+
+    // Reset the confirmation modal to its original state
+    document.getElementById('confirmBtn').classList.remove('hidden');
+    document.getElementById('cancelBtn').classList.remove('hidden');
+    document.getElementById('spinner').classList.add('hidden');
+
+    // Show the confirmation content in the main content area
+    showConfirmationContent(product);
+
+    // Hide the confirmation modal
+    hideConfirmationModal();
+}
+
+function showConfirmationContent(product) {
+    const confirmationContent = `
+        <div class="container mx-auto mt-8 flex-grow">
+            <h2 class="text-2xl font-bold mb-4 text-center">Congratulations!</h2>
+            <p class="text-lg mb-4 text-center">Your action for "${product.name}" has been confirmed.</p>
+            <div class="text-center">
+                <img src="${product.image}" alt="${product.name}" class="w-48 mx-auto"/>
+                <p class="text-md mt-4">${product.description}</p>
+                <p class="text-lg font-bold">${product.price}</p>
+            </div>
+        </div>
+    `;
+    document.getElementById('main-content').innerHTML = confirmationContent;
+}
+
 
 function cancelConfirmation() {
     showProductDetailsModal(window.lastSelectedProductId); // Show the last viewed product details modal

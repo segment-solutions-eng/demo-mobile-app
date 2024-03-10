@@ -10,7 +10,8 @@ const products = [
         actionButtonTitle: "Add to Cart",
         tags: ["New Arrival", "Bestseller"],
         features: ["Feature 1", "Feature 2", "Feature 3"],
-        intentButtonLabel: "Buy Now"
+        intentButtonLabel: "Buy Now",
+        convertButtonLabel: "Confirm Appointment"
     },
     {
         id: "2",
@@ -21,7 +22,8 @@ const products = [
         actionButtonTitle: "Learn More",
         tags: ["New Arrival", "Bestseller"],
         features: ["Feature 1", "Feature 2", "Feature 3"],
-        intentButtonLabel: "Proceed"
+        intentButtonLabel: "Proceed",
+        convertButtonLabel: "Place Order"
     },
     {
         id: "3",
@@ -32,7 +34,8 @@ const products = [
         actionButtonTitle: "Submit Application",
         tags: ["New Arrival", "Bestseller"],
         features: ["Feature 1", "Feature 2", "Feature 3"],
-        intentButtonLabel: "Proceed"
+        intentButtonLabel: "Advance",
+        convertButtonLabel: "Do the Deed"
     },
     {
         id: "4",
@@ -43,6 +46,7 @@ const products = [
         actionButtonTitle: "Next",
         tags: ["New Arrival", "Bestseller"],
         features: ["Feature 1", "Feature 2", "Feature 3"],
-        intentButtonLabel: "Proceed"
+        intentButtonLabel: "Proceed",
+        convertButtonLabel: "Confirm Appointment"
     }
 ];
