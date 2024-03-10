@@ -77,22 +77,47 @@
   </div>
 
 
-  <!-- Confirmation Modal with Tailwind CSS -->
+  <!-- Confirmation Modal -->
   <div id="confirmationModal"
-    class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center flex overflow-y-auto h-full w-full">
-    <div class="bg-white rounded-lg shadow-xl p-5 m-4 max-w-sm max-h-full overflow-y-auto">
-      <h3 class="text-lg font-medium leading-6 text-gray-900">Confirm Your Action</h3>
-      <p class="mt-2 text-sm text-gray-500">Are you sure you want to proceed?</p>
-      <div class="mt-4 flex items-center justify-end">
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          id="confirmBtn">Confirm</button>
-        <button
-          class="ml-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          id="cancelBtn">Back</button>
+    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50 flex justify-center items-start pt-10">
+    <!-- Modal container -->
+    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-4xl m-8 mx-auto flex flex-col md:flex-row">
+      <!-- Close button moved to top-left -->
+      <button class="absolute top-0 left-0 mt-4 ml-4" onclick="hideConfirmationModal()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <!-- Modal content -->
+      <div class="flex w-full h-full">
+        <!-- Left column for an icon or image -->
+        <div class="flex-1 flex justify-center items-center p-4">
+          <!-- Placeholder for an icon or image -->
+          <span class="fas fa-question-circle fa-5x text-gray-400"></span>
+        </div>
+        <!-- Right column for the details -->
+        <div class="flex-1 flex flex-col p-4 bg-gray-200">
+          <div class="flex-1">
+            <h3 id="confirmationTitle" class="text-2xl font-semibold">Confirm Your Action</h3>
+            <p id="confirmationMessage" class="text-lg mb-4">Are you sure you want to proceed with this action?</p>
+          </div>
+          <div class="intent-cancel-container space-y-4 mb-4">
+            <button id="confirmBtn"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+              Confirm
+            </button>
+            <button id="cancelBtn"
+              class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+              onclick="cancelConfirmation()">
+              Back
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+
 
 
   <script src="config.js"></script>
