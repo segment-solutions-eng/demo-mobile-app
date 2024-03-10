@@ -32,9 +32,9 @@ const config = {
     colors: {
         headerColor: "#000000",
         footerColor: "#000000",
-        bannerColor: "#197049",
+        bannerColor: "#FF4C00",
         bannerTextColor: "#FFFFFF",
-        buttonColor: "#197049",
+        buttonColor: "#FF4C00",
         modalDetailsBackground: "#EFEFEF"
     },
     resources: [
