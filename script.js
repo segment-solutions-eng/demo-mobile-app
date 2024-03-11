@@ -403,8 +403,26 @@ function loadResourcesContent() {
         category.items.forEach((item) => {
             const itemElement = document.createElement('div');
             itemElement.className = 'pl-10 p-4 hover:bg-gray-50';
-            itemElement.innerHTML = `<a href="${item.url}" target="_blank" class="text-blue-600 hover:underline">${item.title}</a>
-                               <p class="text-gray-600">${item.description}</p>`;
+            const linkElement = document.createElement('a');
+            linkElement.href = item.url;
+            linkElement.target = "_blank";
+            linkElement.className = "text-blue-600 hover:underline";
+            linkElement.textContent = item.title;
+
+            // Add event listener for tracking
+            linkElement.addEventListener('click', () => {
+                analytics.track('Resource Viewed', {
+                    Category: category.category,
+                    Title: item.title
+                });
+            });
+
+            itemElement.appendChild(linkElement);
+            const descriptionElement = document.createElement('p');
+            descriptionElement.className = 'text-gray-600';
+            descriptionElement.textContent = item.description;
+            itemElement.appendChild(descriptionElement);
+
             categoryContent.appendChild(itemElement);
         });
 
