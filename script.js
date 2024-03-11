@@ -471,8 +471,10 @@ function setCookie(name, value, days) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    // Set the cookie with SameSite=Lax and Secure if needed
+    document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax" + (location.protocol === "https:" ? "; Secure" : "");
 }
+
 
 function getCookie(name) {
     var nameEQ = name + "=";
