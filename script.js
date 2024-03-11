@@ -264,46 +264,6 @@ function hideConfirmationModal() {
     document.getElementById('confirmationModal').classList.add('hidden');
 }
 
-// Launch Completion and Confirmation Page
-// function confirmAction() {
-//     const confirmBtn = document.getElementById('confirmBtn');
-//     const productId = confirmBtn.dataset.productId;
-//     const product = products.find(p => p.id === productId);
-//     if (!product) {
-//         console.error('Product not found');
-//         return;
-//     }
-
-//     // Show loading icon inside the confirmation modal
-//     const confirmationModalContent = document.querySelector('#confirmationModal .flex-1.flex.flex-col.p-4.bg-gray-200');
-//     confirmationModalContent.innerHTML = `
-//         <div class="loading-container flex justify-center items-center">
-//             <div class="loader"></div> <!-- Add your custom loading icon here -->
-//             <p class="text-center mt-2">Processing...</p>
-//         </div>
-//     `;
-
-//     // Simulate a delay for server response
-//     setTimeout(() => {
-//         // Hide the confirmation modal
-//         hideConfirmationModal();
-
-//         // Update the main content with the confirmation message
-//         const confirmationContent = `
-//             <div class="container mx-auto mt-8 flex-grow">
-//                 <h2 class="text-2xl font-bold mb-4 text-center">Congratulations!</h2>
-//                 <p class="text-lg mb-4 text-center">Your action for "${product.name}" has been confirmed.</p>
-//                 <div class="text-center">
-//                     <img src="${product.image}" alt="${product.name}" class="w-48 mx-auto"/>
-//                     <p class="text-md mt-4">${product.description}</p>
-//                     <p class="text-lg font-bold">${product.price}</p>
-//                 </div>
-//             </div>
-//         `;
-//         document.getElementById('main-content').innerHTML = confirmationContent;
-//     }, 2000); // Adjust the delay as needed, 2000 milliseconds = 2 seconds
-// }
-
 // Trigger COnfirmation
 function confirmAction() {
     // Simulate thinking state
@@ -354,7 +314,6 @@ function showConfirmationContent(product) {
     document.getElementById('main-content').innerHTML = confirmationContent;
 }
 
-
 function cancelConfirmation() {
     showProductDetailsModal(window.lastSelectedProductId); // Show the last viewed product details modal
     hideConfirmationModal();
@@ -366,7 +325,6 @@ function resetAllModals() {
     hideConfirmationModal();
     // Add any additional reset logic here
 }
-
 
 
 // Home Page
@@ -439,20 +397,138 @@ function loadResourcesContent() {
     });
 }
 
-
-
-
-
 // Profile Page
 function loadProfileContent() {
-    const content = `
-    <div class="container mx-auto mt-8 flex-grow">
-      <h2 class="text-2xl font-bold mb-4 text-center px-4 py-2 bg-gray-100 rounded-lg shadow">Profile</h2>
-      <div id="productGrid" class="grid grid-cols-2 gap-6 mt-6">
-        <!-- Catalog items will be loaded here -->
+    const loggedIn = getCookie("loggedIn");
+    if (loggedIn) {
+        // If user is logged in, show profile content
+        showProfilePage();
+    } else {
+        // If the user is not logged in, show the login form
+        showLoginPage();
+    }
+}
+
+function showProfilePage() {
+    // Here you would retrieve user details stored in cookies or local storage and display them
+    // For now, we'll just show a generic profile page
+
+    // Retrieve the username from the cookie
+    const username = getCookie("username");
+
+    const profileContent = `
+      <div class="container mx-auto mt-8 flex-grow">
+        <h2 class="text-2xl font-bold mb-4 text-center">Welcome, ${username}</h2>
+        <!-- Add more personalized profile content here -->
+        <div class="text-center">
+          <p class="text-lg">This is your profile page.</p>
+          <button onclick="logoutUser()" class="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('main-content').innerHTML = profileContent;
+}
+
+
+function showLoginPage() {
+    const loginContent = `
+    <div class="flex items-center justify-center min-h-screen bg-gray-100">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
+        <form class="mt-8 space-y-6" action="#" method="POST" onsubmit="event.preventDefault(); loginUser(this.username.value, this.password.value);">
+          <input type="hidden" name="remember" value="true">
+          <div class="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label for="username" class="sr-only">Email address</label>
+              <input id="username" name="username" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+            </div>
+            <div>
+              <label for="password" class="sr-only">Password</label>
+              <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Sign in
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  `;
-    document.getElementById('main-content').innerHTML = content;
-
+    `;
+    document.getElementById('main-content').innerHTML = loginContent;
 }
+
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999;';
+}
+
+function checkLogin() {
+    var loggedIn = getCookie("loggedIn");
+    if (loggedIn) {
+        // User is logged in
+        showProfilePage();
+    } else {
+        // User is not logged in
+        showLoginPage();
+    }
+}
+
+function isValidEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+}
+
+function loginUser(username, password) {
+    if (!isValidEmail(username)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    // Simulate login by setting a cookie
+    setCookie("loggedIn", true, 7);
+    setCookie("username", username, 7); // Store the username (email) for the Identify call
+
+    // Segment analytics track and identify calls
+    analytics.track('User Logged In');
+    analytics.identify(username, {
+        email: username
+    });
+
+    showProfilePage();
+}
+
+function logoutUser() {
+    eraseCookie("loggedIn");
+    eraseCookie("username"); // Also erase the username cookie
+    showLoginPage();
+}
+
+// Call checkLogin on page load
+document.addEventListener("DOMContentLoaded", checkLogin);
