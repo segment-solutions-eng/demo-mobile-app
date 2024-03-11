@@ -500,6 +500,7 @@ function loginUser(username, password) {
 function logoutUser() {
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("username");
+    analytics.track('User Logged Out');
     analytics.reset();
     showLoginPage();
 }
