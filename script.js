@@ -502,6 +502,3 @@ function logoutUser() {
     localStorage.removeItem("username");
     showLoginPage();
 }
-
-// Call checkLogin on page load
-document.addEventListener("DOMContentLoaded", checkLogin);
