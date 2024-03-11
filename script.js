@@ -413,7 +413,7 @@ function showProfilePage() {
     // Here you would retrieve user details stored in local storage and display them
     // For now, we'll just show a generic profile page
 
-    // Retrieve the username from the cookie
+    // Retrieve the username from the localstorage
     const username = localStorage.getItem("username");
 
     const profileContent = `
@@ -500,5 +500,6 @@ function loginUser(username, password) {
 function logoutUser() {
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("username");
+    analytics.reset();
     showLoginPage();
 }
