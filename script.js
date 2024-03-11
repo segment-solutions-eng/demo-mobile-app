@@ -399,7 +399,7 @@ function loadResourcesContent() {
 
 // Profile Page
 function loadProfileContent() {
-    const loggedIn = getCookie("loggedIn");
+    const loggedIn = localStorage.getItem("loggedIn");
     if (loggedIn) {
         // If user is logged in, show profile content
         showProfilePage();
@@ -410,11 +410,11 @@ function loadProfileContent() {
 }
 
 function showProfilePage() {
-    // Here you would retrieve user details stored in cookies or local storage and display them
+    // Here you would retrieve user details stored in local storage and display them
     // For now, we'll just show a generic profile page
 
     // Retrieve the username from the cookie
-    const username = getCookie("username");
+    const username = localStorage.getItem("username");
 
     const profileContent = `
       <div class="container mx-auto mt-8 flex-grow">
@@ -464,40 +464,11 @@ function showLoginPage() {
     document.getElementById('main-content').innerHTML = loginContent;
 }
 
-function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    // Set the cookie with SameSite=Lax and Secure if needed
-    document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax" + (location.protocol === "https:" ? "; Secure" : "");
-}
-
-
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-}
-
-function eraseCookie(name) {
-    document.cookie = name + '=; Max-Age=-99999999;';
-}
-
 function checkLogin() {
-    var loggedIn = getCookie("loggedIn");
+    var loggedIn = localStorage.getItem("loggedIn");
     if (loggedIn) {
-        // User is logged in
         showProfilePage();
     } else {
-        // User is not logged in
         showLoginPage();
     }
 }
@@ -513,9 +484,9 @@ function loginUser(username, password) {
         return;
     }
 
-    // Simulate login by setting a cookie
-    setCookie("loggedIn", true, 7);
-    setCookie("username", username, 7); // Store the username (email) for the Identify call
+    // Simulate login by setting the login state in localStorage
+    localStorage.setItem("loggedIn", true);
+    localStorage.setItem("username", username); // Store the username for the Identify call
 
     // Segment analytics track and identify calls
     analytics.track('User Logged In');
@@ -527,8 +498,8 @@ function loginUser(username, password) {
 }
 
 function logoutUser() {
-    eraseCookie("loggedIn");
-    eraseCookie("username"); // Also erase the username cookie
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("username");
     showLoginPage();
 }
 
