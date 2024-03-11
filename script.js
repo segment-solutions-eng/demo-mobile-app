@@ -72,7 +72,7 @@ function populateFooterNavigation() {
                 e.preventDefault(); // Prevent default anchor action
                 const target = link.url.substring(1); // Remove the '#' from the URL
                 window.location.hash = target; // Update the URL hash
-                loadContent(target); // Load the content based on the target
+                loadContent(target, link.label); // Load the content based on the target
             });
 
 
@@ -82,8 +82,8 @@ function populateFooterNavigation() {
 }
 
 
-function loadContent(contentId) {
-    analytics.screen(contentId); // Track virtual page views (Single Page App)
+function loadContent(contentId, label = contentId) {
+    analytics.screen(label); // Track virtual page views (Single Page App)
     switch (contentId) {
         case 'home':
             loadHomePageContent();
