@@ -83,6 +83,7 @@ function populateFooterNavigation() {
 
 
 function loadContent(contentId) {
+    analytics.screen(contentId); // Track virtual page views (Single Page App)
     switch (contentId) {
         case 'home':
             loadHomePageContent();
@@ -148,8 +149,16 @@ function setupModalEventListeners() {
 // Handle Action Button Click - Shows Product Details Modal
 function handleActionButtonClick(event) {
     const productId = event.target.dataset.productId;
+    const product = products.find(p => p.id === productId);
+    analytics.track('Product Details Viewed', {
+        productId: product.id,
+        productName: product.name,
+        productPrice: product.price,
+        productTags: product.tags,
+    });
     showProductDetailsModal(productId);
 }
+
 
 // Setup Confirmation Modal Listeners
 function setupConfirmationModalListeners() {
@@ -226,7 +235,13 @@ function populateProductDetailsModal(productId) {
     intentButton.className = 'intent-button hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full';
     intentButton.style.backgroundColor = config.colors.buttonColor; // Set button color from config
     intentButton.style.color = '#FFFFFF'; // Optional: Set text color to white
-    intentButton.onclick = () => showConfirmationModal(productId);
+    intentButton.onclick = () => {
+        analytics.track('Product Intent Action', {
+            productId: product.id,
+            action: product.intentButtonLabel,
+        });
+        showConfirmationModal(productId);
+    };
     buttonContainer.appendChild(intentButton);
 
     // Close Button
@@ -264,12 +279,19 @@ function hideConfirmationModal() {
     document.getElementById('confirmationModal').classList.add('hidden');
 }
 
-// Trigger COnfirmation
+// Trigger Confirmation
 function confirmAction() {
-    // Simulate thinking state
     document.getElementById('confirmBtn').classList.add('hidden');
     document.getElementById('cancelBtn').classList.add('hidden');
     document.getElementById('spinner').classList.remove('hidden');
+
+    // Track Call
+    const productId = document.getElementById('confirmBtn').dataset.productId;
+    const product = products.find(p => p.id === productId);
+    analytics.track('Product Action Confirmed', {
+        productId: product.id,
+        action: product.convertButtonLabel,
+    });
 
     // Simulate server response delay
     setTimeout(() => {
