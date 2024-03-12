@@ -150,8 +150,7 @@ function setupModalEventListeners() {
 function handleActionButtonClick(event) {
     const productId = event.target.dataset.productId;
     const product = products.find(p => p.id === productId);
-    analytics.track('Product Details Viewed', {
-        productId: product.id,
+    analytics.track('Catalog Item Clicked', {
         productName: product.name,
         productPrice: product.price,
         productTags: product.tags,
