@@ -6,11 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
     setupConfirmationModalListeners();
 
     // Handle initial hash
+    // Normalize the hash to lowercase before loading content
     const currentHash = window.location.hash.substring(1);
-    if (currentHash) {
+    if (currentHash.toLowerCase() === "home") {
+        loadContent("Home");
+    } else if (currentHash) {
         loadContent(currentHash);
     } else {
-        loadHomePageContent();
+        loadContent("Home"); // Adjust to "Home" to ensure consistency
     }
 });
 function applyConfigurations() {
@@ -83,8 +86,10 @@ function populateFooterNavigation() {
 
 
 function loadContent(contentId, label = contentId) {
-    analytics.screen(label); // Track virtual page views (Single Page App)
-    switch (contentId) {
+    const formattedLabel = contentId.charAt(0).toUpperCase() + contentId.slice(1); // Ensure the first letter is always capitalized
+    analytics.screen(formattedLabel); // Use the formatted label for analytics
+
+    switch (contentId.toLowerCase()) {
         case 'home':
             loadHomePageContent();
             break;
@@ -120,17 +125,18 @@ function renderProducts() {
 
 
 function createProductCard(product) {
+    const { title, subtitle, image, actionButtonTitle } = product.basicInformation;
     // Dynamically create the product card with flex layout to keep the price and button anchored at the bottom
     return `
     <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
-      <img src="${product.image}" alt="${product.name}" class="w-full object-cover">
+      <img src="${image}" alt="${title}" class="w-full object-cover">
       <div class="p-4 flex flex-1 flex-col justify-between">
         <div>
-          <h3 class="text-xl text-center font-semibold mb-2">${product.name}</h3>
+          <h3 class="text-xl text-center font-semibold mb-2">${title}</h3>
         </div>
         <div class="flex items-center justify-between">
-          <span class="text-lg">${product.price}</span>
-          <button data-product-id="${product.id}" style="background-color: ${config.colors.buttonColor};" class="action-button hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${product.actionButtonTitle}</button>
+          <span class="text-lg">${subtitle}</span>
+          <button data-product-id="${product.id}" style="background-color: ${config.colors.buttonColor};" class="action-button hover:bg-indigo-600 text-white px-3 py-1 rounded-full">${actionButtonTitle}</button>
         </div>
       </div>
     </div>
@@ -150,10 +156,11 @@ function setupModalEventListeners() {
 function handleActionButtonClick(event) {
     const productId = event.target.dataset.productId;
     const product = products.find(p => p.id === productId);
-    analytics.track('Catalog Item Clicked', {
-        productName: product.name,
-        productPrice: product.price,
-        productTags: product.tags,
+    const trackName = product.basicInformation.actionButtonTrackName;
+
+    analytics.track(trackName, {
+        productName: product.basicInformation.Title,
+        productPrice: product.basicInformation.subtitle,
     });
     showProductDetailsModal(productId);
 }
@@ -198,16 +205,16 @@ function populateProductDetailsModal(productId) {
     }
 
     // Set product details in the modal
-    document.getElementById('modalProductName').textContent = product.name;
-    document.getElementById('modalProductImage').src = product.image;
-    document.getElementById('modalProductImage').alt = product.name; // Ensure alt text is updated for accessibility
-    document.getElementById('modalProductDescription').textContent = product.description;
-    document.getElementById('modalProductPrice').textContent = product.price;
+    document.getElementById('modalProductName').textContent = product.basicInformation.title;
+    document.getElementById('modalProductImage').src = product.basicInformation.image;
+    document.getElementById('modalProductImage').alt = product.basicInformation.name; // Ensure alt text is updated for accessibility
+    document.getElementById('modalProductDescription').textContent = product.productDetailsCard.description;
+    document.getElementById('modalProductPrice').textContent = product.basicInformation.subtitle;
 
     // Handle product tags
     const modalProductTags = document.getElementById('modalProductTags');
     modalProductTags.innerHTML = ''; // Clear existing tags
-    product.tags.forEach(tag => {
+    product.productDetailsCard.tags.forEach(tag => {
         const tagElement = document.createElement('span');
         tagElement.className = 'inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2';
         tagElement.textContent = tag;
@@ -217,7 +224,7 @@ function populateProductDetailsModal(productId) {
     // Handle product features
     const modalProductFeatures = document.getElementById('modalProductFeatures');
     modalProductFeatures.innerHTML = ''; // Clear existing features
-    product.features.forEach(feature => {
+    product.productDetailsCard.features.forEach(feature => {
         const featureItem = document.createElement('li');
         featureItem.textContent = feature;
         featureItem.className = 'feature-item'; // Use this class for styling if needed
@@ -230,13 +237,12 @@ function populateProductDetailsModal(productId) {
 
     // Intent Button (e.g., Buy Now, Add to Cart)
     const intentButton = document.createElement('button');
-    intentButton.textContent = product.intentButtonLabel;
+    intentButton.textContent = product.productDetailsCard.intentButtonLabel;
     intentButton.className = 'intent-button hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full';
     intentButton.style.backgroundColor = config.colors.buttonColor; // Set button color from config
     intentButton.style.color = '#FFFFFF'; // Optional: Set text color to white
     intentButton.onclick = () => {
-        analytics.track('Product Intent Action', {
-            productId: product.id,
+        analytics.track(product.productDetailsCard.intentButtonTrackName, {
             action: product.intentButtonLabel,
         });
         showConfirmationModal(productId);
@@ -265,7 +271,7 @@ function showConfirmationModal(productId) {
 
     const confirmBtn = document.getElementById('confirmBtn');
     if (confirmBtn) {
-        confirmBtn.textContent = product.convertButtonLabel;
+        confirmBtn.textContent = product.conversionModal.convertButtonLabel;
         confirmBtn.dataset.productId = productId; // Store the product ID on the confirm button
     }
 
@@ -287,8 +293,7 @@ function confirmAction() {
     // Track Call
     const productId = document.getElementById('confirmBtn').dataset.productId;
     const product = products.find(p => p.id === productId);
-    analytics.track('Product Action Confirmed', {
-        productId: product.id,
+    analytics.track(product.conversionModal.convertButtonTrackName, {
         action: product.convertButtonLabel,
     });
 
@@ -324,15 +329,20 @@ function showConfirmationContent(product) {
     const confirmationContent = `
         <div class="container mx-auto mt-8 flex-grow">
             <h2 class="text-2xl font-bold mb-4 text-center">Congratulations!</h2>
-            <p class="text-lg mb-4 text-center">Your action for "${product.name}" has been confirmed.</p>
+            <p class="text-lg mb-4 text-center">Your action for "${product.basicInformation.title}" has been confirmed.</p>
             <div class="text-center">
-                <img src="${product.image}" alt="${product.name}" class="w-48 mx-auto"/>
-                <p class="text-md mt-4">${product.description}</p>
-                <p class="text-lg font-bold">${product.price}</p>
+                <img src="${product.basicInformation.image}" alt="${product.basicInformation.title}" class="w-48 mx-auto"/>
+                <p class="text-md mt-4">${product.productDetailsCard.description}</p>
+                <p class="text-lg font-bold">${product.basicInformation.subtitle}</p>
             </div>
         </div>
     `;
     document.getElementById('main-content').innerHTML = confirmationContent;
+
+    // Track the confirmation page view
+    analytics.track(product.conversionModal.confirmationTrackName, {
+        action: product.conversionModal.convertButtonLabel
+    });
 }
 
 function cancelConfirmation() {

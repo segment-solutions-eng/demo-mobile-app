@@ -2,51 +2,92 @@
 
 const products = [
     {
-        id: "1",
-        name: "Open DailyPay Card",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porta nibh venenatis cras sed felis eget velit aliquet sagittis. Condimentum id venenatis a condimentum vitae sapien pellentesque.",
-        price: "",
-        image: "assets/product1.webp",
-        actionButtonTitle: "Apply Now!",
-        tags: ["New Arrival", "Bestseller"],
-        features: ["Feature 1", "Feature 2", "Feature 3"],
-        intentButtonLabel: "Apply",
-        convertButtonLabel: "Submit Application"
+        id: "1", // Don't edit the ID Number. Used for dynamic content organization
+        basicInformation: {
+            title: "Open DailyPay Card",
+            subtitle: "",
+            image: "assets/product1.webp",
+            actionButtonTitle: "Apply Now!",
+            actionButtonTrackName: "Apply Now Clicked" // Custom track name for the action button
+        },
+        productDetailsCard: {
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            tags: ["New Arrival", "Bestseller"],
+            features: ["Feature 1", "Feature 2", "Feature 3"],
+            intentButtonLabel: "Apply",
+            intentButtonTrackName: "Application Started" // Custom track name for the intent button
+        },
+        conversionModal: {
+            convertButtonLabel: "Submit Application",
+            convertButtonTrackName: "Application Submitted", // Custom track name for the convert button
+            confirmationTrackName: "Application Completed" // Custom track name for viewing the confirmation page
+        }
     },
     {
-        id: "2",
-        name: "Transfer Money",
-        description: "Accumsan sit amet nulla facilisi morbi tempus iaculis urna. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.",
-        price: "Instantly Transfer to Venmo",
-        image: "assets/product2.webp",
-        actionButtonTitle: "Transfer",
-        tags: ["New Arrival", "Bestseller"],
-        features: ["Feature 1", "Feature 2", "Feature 3"],
-        intentButtonLabel: "Transfer",
-        convertButtonLabel: "Begin Transfer"
+        id: "2", // Don't edit the ID Number. Used for dynamic content organization
+        basicInformation: {
+            title: "Transfer Funds",
+            subtitle: "Instantly Transfer to Venmo",
+            image: "assets/product2.webp",
+            actionButtonTitle: "Transfer",
+            actionButtonTrackName: "Transfer Button Clicked" // Custom track name for the action button
+        },
+        productDetailsCard: {
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            tags: ["New Arrival", "Bestseller"],
+            features: ["Feature 1", "Feature 2", "Feature 3"],
+            intentButtonLabel: "Transfer",
+            intentButtonTrackName: "Transfer Configuration Started" // Custom track name for the intent button
+        },
+        conversionModal: {
+            convertButtonLabel: "Begin Transfer",
+            convertButtonTrackName: "Transfer Initiated", // Custom track name for the convert button
+            confirmationTrackName: "Transfer Completed" // Custom track name for viewing the confirmation page
+        }
     },
     {
-        id: "3",
-        name: "Setup Direct Deposit",
-        image: "assets/product3.webp",
-        description: "Quis blandit turpis cursus in hac habitasse platea dictumst. Pharetra pharetra massa massa ultricies mi quis hendrerit dolor. Pulvinar etiam non quam lacus.",
-        price: "No Fees!",
-        actionButtonTitle: "Learn More",
-        tags: ["New Arrival", "Bestseller"],
-        features: ["Feature 1", "Feature 2", "Feature 3"],
-        intentButtonLabel: "Continue",
-        convertButtonLabel: "Confirm"
+        id: "3", // Don't edit the ID Number. Used for dynamic content organization
+        basicInformation: {
+            title: "Setup Direct Deposit",
+            subtitle: "No Fees!",
+            image: "assets/product3.webp",
+            actionButtonTitle: "Learn More",
+            actionButtonTrackName: "Direct Deposit Button Clicked" // Custom track name for the action button
+        },
+        productDetailsCard: {
+            description: "Quis blandit turpis cursus in hac habitasse platea dictumst. Pharetra pharetra massa massa ultricies mi quis hendrerit dolor. Pulvinar etiam non quam lacus.",
+            tags: ["New Arrival", "Bestseller"],
+            features: ["Feature 1", "Feature 2", "Feature 3"],
+            intentButtonLabel: "Continue",
+            intentButtonTrackName: "Direct Deposit Setup Started" // Custom track name for the intent button
+        },
+        conversionModal: {
+            convertButtonLabel: "Confirm",
+            convertButtonTrackName: "Direct Deposit Setup Confirmed", // Custom track name for the convert button
+            confirmationTrackName: "Direct Deposit Configuration Completed" // Custom track name for viewing the confirmation page
+        }
     },
     {
-        id: "4",
-        name: "Transfer Money",
-        image: "assets/product4.webp",
-        description: "Nibh venenatis cras sed felis eget velit aliquet sagittis. Tristique senectus et netus et malesuada fames ac. Ac auctor augue mauris augue neque. olor sed viverra ipsum nunc.",
-        price: "No Fees!",
-        actionButtonTitle: "Learn More",
-        tags: ["New Arrival", "Bestseller"],
-        features: ["Feature 1", "Feature 2", "Feature 3"],
-        intentButtonLabel: "Proceed",
-        convertButtonLabel: "Begin Transfer"
+        id: "4", // Don't edit the ID Number. Used for dynamic content organization
+        basicInformation: {
+            title: "Transfer Money",
+            subtitle: "No Fees!",
+            image: "assets/product4.webp",
+            actionButtonTitle: "Learn More",
+            actionButtonTrackName: "Transfer Button Clicked" // Custom track name for the action button
+        },
+        productDetailsCard: {
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            tags: ["No Fees!", "Most Popular"],
+            features: ["Feature 1", "Feature 2", "Feature 3"],
+            intentButtonLabel: "Transfer",
+            intentButtonTrackName: "Transfigure Configuration Started" // Custom track name for the intent button
+        },
+        conversionModal: {
+            convertButtonLabel: "Begin Transfer",
+            convertButtonTrackName: "Transfer Initiated", // Custom track name for the convert button
+            confirmationTrackName: "Transfer Completed" // Custom track name for viewing the confirmation page
+        }
     }
-];
+
+]
