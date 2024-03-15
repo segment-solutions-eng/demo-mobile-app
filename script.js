@@ -20,6 +20,7 @@ function applyConfigurations() {
     setLogoAttributes();
     setBannerStyles();
     setBannerText();
+    setHeaderAndFooterStyles();
     populateFooterNavigation();
 }
 
@@ -44,6 +45,20 @@ function setBannerText() {
     const bannerTextElement = document.getElementById('bannerText');
     if (bannerTextElement) {
         bannerTextElement.textContent = config.header.bannerText;
+    }
+}
+
+function setHeaderAndFooterStyles() {
+    // Apply header color from config
+    const header = document.querySelector('header');
+    if (header) {
+        header.style.backgroundColor = config.colors.headerColor;
+    }
+
+    // Apply footer color from config
+    const footer = document.querySelector('footer');
+    if (footer) {
+        footer.style.backgroundColor = config.colors.footerColor;
     }
 }
 
@@ -262,24 +277,6 @@ function populateProductDetailsModal(productId) {
 function hideProductDetailsModal() {
     document.getElementById('productDetailsModal').classList.add('hidden');
 }
-
-// Configure the Confirmation modal
-// function showConfirmationModal(productId) {
-//     const product = products.find(p => p.id === productId);
-//     if (!product) {
-//         console.error('Product not found');
-//         return;
-//     }
-
-//     const confirmBtn = document.getElementById('confirmBtn');
-//     if (confirmBtn) {
-//         confirmBtn.textContent = product.conversionModal.convertButtonLabel;
-//         confirmBtn.dataset.productId = productId; // Store the product ID on the confirm button
-//     }
-
-//     document.getElementById('confirmationModal').classList.remove('hidden');
-//     document.getElementById('productDetailsModal').classList.add('hidden'); // Hide product details modal
-// }
 
 function showConfirmationModal(productId) {
     const product = products.find(p => p.id === productId);
