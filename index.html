@@ -89,51 +89,36 @@
   </div>
 
 
-  <!-- Confirmation Modal -->
   <div id="confirmationModal"
-    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50 flex justify-center items-start pt-10">
-    <!-- Modal container -->
-    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-4xl m-8 mx-auto flex flex-col md:flex-row">
-      <!-- Close button moved to top-left -->
-      <button class="absolute top-0 left-0 mt-4 ml-4" onclick="hideConfirmationModal()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
+    class="fixed inset-0 bg-gray-600 bg-opacity-75 overflow-y-auto h-full w-full hidden z-50 flex justify-center items-center">
+    <div class="relative bg-white rounded-lg shadow-xl w-full max-w-5xl mx-4 md:mx-8 my-10 p-6">
+      <button class="absolute top-0 right-0 mt-4 mr-4" onclick="hideConfirmationModal()">
+        <!-- Close button SVG -->
       </button>
-      <!-- Modal content -->
-      <div class="flex w-full h-full">
-        <!-- Left column for an icon or image -->
-        <div class="flex-1 flex justify-center items-center p-4">
-          <!-- Placeholder for an icon or image -->
-          <span class="fas fa-question-circle fa-5x text-gray-400"></span>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div class="md:col-span-1 flex justify-center items-center p-4">
+          <img id="confirmationProductImage" src="" alt="Product Image" class="w-24 h-24 rounded-full object-cover">
+          <!-- Updated Product Image -->
         </div>
-        <!-- Right column for the details -->
-        <div class="flex-1 flex flex-col p-4 bg-gray-200">
-          <div class="flex-1">
-            <h3 id="confirmationTitle" class="text-2xl font-semibold">Confirm Your Action</h3>
-            <p id="confirmationMessage" class="text-lg mb-4">Are you sure you want to proceed with this action?</p>
-          </div>
-          <div class="intent-cancel-container space-y-4 mb-4">
-            <button id="confirmBtn"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
-              Confirm
-            </button>
+        <div class="md:col-span-4 p-4 bg-gray-100 rounded-lg">
+          <h3 id="confirmationProductName" class="text-xl font-semibold mb-2">Confirm Your Action</h3>
+          <p id="confirmationProductDescription" class="text-md mb-4">Please confirm if you wish to proceed with this
+            action.</p>
+          <div class="flex flex-col sm:flex-row sm:justify-end gap-2">
             <button id="cancelBtn"
-              class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-              onclick="cancelConfirmation()">
-              Back
-            </button>
-          </div>
-          <div id="spinner" class="hidden">
-            <!-- Spinner Icon (use your preferred spinner icon here) -->
-            <div class="loader"></div>
+              class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              onclick="cancelConfirmation()">Back</button>
+            <button id="confirmBtn"
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">Confirm</button>
           </div>
         </div>
       </div>
     </div>
+    <!-- Spinner Overlay -->
+    <div id="spinner" class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+      <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+    </div>
   </div>
-
-
 
 
   <script src="config.js"></script>

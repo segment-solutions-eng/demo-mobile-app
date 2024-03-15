@@ -264,6 +264,23 @@ function hideProductDetailsModal() {
 }
 
 // Configure the Confirmation modal
+// function showConfirmationModal(productId) {
+//     const product = products.find(p => p.id === productId);
+//     if (!product) {
+//         console.error('Product not found');
+//         return;
+//     }
+
+//     const confirmBtn = document.getElementById('confirmBtn');
+//     if (confirmBtn) {
+//         confirmBtn.textContent = product.conversionModal.convertButtonLabel;
+//         confirmBtn.dataset.productId = productId; // Store the product ID on the confirm button
+//     }
+
+//     document.getElementById('confirmationModal').classList.remove('hidden');
+//     document.getElementById('productDetailsModal').classList.add('hidden'); // Hide product details modal
+// }
+
 function showConfirmationModal(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) {
@@ -271,15 +288,26 @@ function showConfirmationModal(productId) {
         return;
     }
 
+    // Customize the modal size and appearance
+    const modalContainer = document.getElementById('confirmationModal').querySelector('.relative');
+    modalContainer.className = 'relative bg-white rounded-lg shadow-lg w-full max-w-6xl m-8 mx-auto flex flex-col md:flex-row';
+
+    // Populate modal with product details (image, title, description)
+    // This assumes you have placeholders in your HTML for these details
+    document.getElementById('confirmationProductImage').src = product.basicInformation.image;
+    document.getElementById('confirmationProductName').textContent = product.basicInformation.title;
+    document.getElementById('confirmationProductDescription').textContent = product.productDetailsCard.description;
+
+    // Customize the Confirm button color and text based on product action
     const confirmBtn = document.getElementById('confirmBtn');
-    if (confirmBtn) {
-        confirmBtn.textContent = product.conversionModal.convertButtonLabel;
-        confirmBtn.dataset.productId = productId; // Store the product ID on the confirm button
-    }
+    confirmBtn.textContent = product.conversionModal.convertButtonLabel;
+    confirmBtn.style.backgroundColor = config.colors.buttonColor; // Set button color from config
+    confirmBtn.dataset.productId = productId; // Store the product ID on the confirm button for use in confirmAction
 
     document.getElementById('confirmationModal').classList.remove('hidden');
     document.getElementById('productDetailsModal').classList.add('hidden'); // Hide product details modal
 }
+
 
 
 function hideConfirmationModal() {
