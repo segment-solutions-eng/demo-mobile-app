@@ -21,6 +21,14 @@ const products = [
             convertButtonLabel: "Submit Application",
             convertButtonTrackName: "Application Submitted", // Custom track name for the convert button
             confirmationTrackName: "Application Completed" // Custom track name for viewing the confirmation page
+        },
+        // Additional Properties used for track calls. Not exposed in website UI
+        trackProperties: {
+            productType: "Financial Service",
+            userSegment: "Premium",
+            seasonalPromo: "Spring2024",
+            property4: "Value 4",
+            property5: "Value 5"
         }
     },
     {
@@ -43,6 +51,13 @@ const products = [
             convertButtonLabel: "Begin Transfer",
             convertButtonTrackName: "Transfer Initiated", // Custom track name for the convert button
             confirmationTrackName: "Transfer Completed" // Custom track name for viewing the confirmation page
+        },
+        trackProperties: {
+            productType: "Financial Service",
+            userSegment: "Premium",
+            seasonalPromo: "Spring2024",
+            property4: "Value 4",
+            property5: "Value 5"
         }
     },
     {
@@ -65,6 +80,13 @@ const products = [
             convertButtonLabel: "Confirm",
             convertButtonTrackName: "Direct Deposit Setup Confirmed", // Custom track name for the convert button
             confirmationTrackName: "Direct Deposit Configuration Completed" // Custom track name for viewing the confirmation page
+        },
+        trackProperties: {
+            productType: "Financial Service",
+            userSegment: "Premium",
+            seasonalPromo: "Spring2024",
+            property4: "Value 4",
+            property5: "Value 5"
         }
     },
     {
@@ -87,6 +109,13 @@ const products = [
             convertButtonLabel: "Begin Transfer",
             convertButtonTrackName: "Transfer Initiated", // Custom track name for the convert button
             confirmationTrackName: "Transfer Completed" // Custom track name for viewing the confirmation page
+        },
+        trackProperties: {
+            productType: "Financial Service",
+            userSegment: "Premium",
+            seasonalPromo: "Spring2024",
+            property4: "Value 4",
+            property5: "Value 5"
         }
     }
 

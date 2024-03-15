@@ -161,6 +161,7 @@ function handleActionButtonClick(event) {
     analytics.track(trackName, {
         productName: product.basicInformation.Title,
         productPrice: product.basicInformation.subtitle,
+        ...product.trackProperties,
     });
     showProductDetailsModal(productId);
 }
@@ -244,6 +245,7 @@ function populateProductDetailsModal(productId) {
     intentButton.onclick = () => {
         analytics.track(product.productDetailsCard.intentButtonTrackName, {
             action: product.intentButtonLabel,
+            ...product.trackProperties
         });
         showConfirmationModal(productId);
     };
@@ -295,6 +297,7 @@ function confirmAction() {
     const product = products.find(p => p.id === productId);
     analytics.track(product.conversionModal.convertButtonTrackName, {
         action: product.convertButtonLabel,
+        ...product.trackProperties
     });
 
     // Simulate server response delay
@@ -341,7 +344,8 @@ function showConfirmationContent(product) {
 
     // Track the confirmation page view
     analytics.track(product.conversionModal.confirmationTrackName, {
-        action: product.conversionModal.convertButtonLabel
+        action: product.conversionModal.convertButtonLabel,
+        ...product.trackProperties
     });
 }
 
