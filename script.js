@@ -417,7 +417,6 @@ function loadCatalogContent() {
 
 function loadResourcesContent() {
     const content = document.getElementById('main-content');
-    // Reset the inner HTML to include a consistent outer structure
     content.innerHTML = `
     <div class="container mx-auto mt-8 flex-grow">
       <h2 class="text-2xl font-bold mb-4 text-center px-4 py-2 bg-gray-100 rounded-lg shadow">Resources</h2>
@@ -425,11 +424,11 @@ function loadResourcesContent() {
         <!-- Accordion items will be dynamically added here -->
       </div>
     </div>
-  `;
+    `;
 
-    const accordionContainer = document.getElementById('accordionContainer'); // Get the newly added accordion container
+    const accordionContainer = document.getElementById('accordionContainer');
 
-    config.resources.forEach((category) => {
+    config.resources.forEach((category, index) => {
         const categoryHeader = document.createElement('button');
         categoryHeader.innerHTML = `<span class="accordion-title">${category.category}</span> <span class="indicator">+</span>`;
         categoryHeader.className = 'accordion-header py-4 px-6 text-left text-lg font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-150 ease-in-out rounded-md shadow-sm my-2 flex justify-between items-center';
@@ -447,14 +446,6 @@ function loadResourcesContent() {
             linkElement.className = "text-blue-600 hover:underline";
             linkElement.textContent = item.title;
 
-            // Add event listener for tracking
-            linkElement.addEventListener('click', () => {
-                analytics.track('Resource Viewed', {
-                    Category: category.category,
-                    Title: item.title
-                });
-            });
-
             itemElement.appendChild(linkElement);
             const descriptionElement = document.createElement('p');
             descriptionElement.className = 'text-gray-600';
@@ -464,19 +455,50 @@ function loadResourcesContent() {
             categoryContent.appendChild(itemElement);
         });
 
-        categoryHeader.addEventListener('click', () => {
-            const expanded = categoryContent.style.maxHeight !== '0px';
-            categoryContent.style.maxHeight = expanded ? '0' : `${categoryContent.scrollHeight}px`;
-            categoryHeader.querySelector('.indicator').textContent = expanded ? '+' : '-';
+        categoryHeader.addEventListener('click', function () {
+            const alreadyExpanded = categoryContent.style.maxHeight !== '0px';
+            document.querySelectorAll('#accordionContainer .accordion-content').forEach((element) => {
+                element.style.maxHeight = '0';
+                element.previousElementSibling.querySelector('.indicator').textContent = '+';
+            });
+
+            if (!alreadyExpanded) {
+                categoryContent.style.maxHeight = `${categoryContent.scrollHeight}px`;
+                this.querySelector('.indicator').textContent = '-';
+            }
         });
 
         accordionContainer.appendChild(categoryHeader);
         accordionContainer.appendChild(categoryContent);
+
+        // Automatically expand the first category
+        if (index === 0) {
+            categoryContent.style.maxHeight = `${categoryContent.scrollHeight}px`;
+            categoryHeader.querySelector('.indicator').textContent = '-';
+        }
     });
 }
 
+
 // Profile Page
 function loadProfileContent() {
+    const analytics = window.analytics;
+    // Retrieve the current user's anonymous ID from Segment
+    const anonymousId = analytics.user().anonymousId();
+
+    // Your Node.js server endpoint that proxies the request to the Segment Profile API
+    // Replace "http://localhost:3000" with the URL of your deployed server if necessary
+    const proxyUrl = `http://localhost:3000/api/profiles/${anonymousId}`;
+
+    axios.get(proxyUrl)
+        .then(function (response) {
+            // Log the response data to the console
+            console.log("Profile data:", response.data);
+        })
+        .catch(function (error) {
+            console.error('Error fetching profile data:', error);
+        });
+
     const loggedIn = localStorage.getItem("loggedIn");
     if (loggedIn) {
         // If user is logged in, show profile content
