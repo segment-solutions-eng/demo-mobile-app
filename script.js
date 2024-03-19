@@ -440,11 +440,29 @@ function loadResourcesContent() {
         category.items.forEach((item) => {
             const itemElement = document.createElement('div');
             itemElement.className = 'pl-10 p-4 hover:bg-gray-50';
+
+            // Create the link element
             const linkElement = document.createElement('a');
             linkElement.href = item.url;
             linkElement.target = "_blank";
             linkElement.className = "text-blue-600 hover:underline";
             linkElement.textContent = item.title;
+
+            // Add click event listener for tracking
+            linkElement.addEventListener('click', function (e) {
+                // Prevent the default action to ensure the tracking event is sent before navigation
+                e.preventDefault();
+
+                // Track the resource view event
+                analytics.track('Resource Viewed', {
+                    title: item.title,
+                    category: category.category,
+                    url: item.url
+                });
+
+                // Navigate to the URL after tracking
+                window.open(item.url, "_blank");
+            });
 
             itemElement.appendChild(linkElement);
             const descriptionElement = document.createElement('p');
@@ -478,7 +496,6 @@ function loadResourcesContent() {
         }
     });
 }
-
 
 // Profile Page
 function loadProfileContent() {
