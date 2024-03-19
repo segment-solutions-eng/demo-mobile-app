@@ -30,12 +30,12 @@ const config = {
         ]
     },
     colors: {
-        headerColor: "#000000",
-        footerColor: "#000000",
+        headerColor: "#04143A",
+        footerColor: "#04143A",
         bannerColor: "#FF4C00",
         bannerTextColor: "#FFFFFF",
-        buttonColor: "#FF4C00",
-        modalDetailsBackground: "#EFEFEF"
+        buttonColor: "#04143A",
+        modalDetailsBackground: "#F5F6FC"
     },
     resources: [
         {
