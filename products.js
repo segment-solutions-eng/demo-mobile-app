@@ -91,7 +91,7 @@ const products = [
     {
         id: "4", // Don't edit the ID Number. Used for dynamic content organization
         basicInformation: {
-            title: "Transfer Money",
+            title: "Transfer Funds",
             subtitle: "No Fees!",
             image: "assets/product4.webp",
             actionButtonTitle: "Learn More",
