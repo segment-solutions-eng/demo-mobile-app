@@ -63,8 +63,8 @@ const products = [
     {
         id: "3", // Don't edit the ID Number. Used for dynamic content organization
         basicInformation: {
-            title: "Setup Direct Deposit",
-            subtitle: "No Fees!",
+            title: "Apply for Platinum Card",
+            subtitle: "Segment Platinum",
             image: "assets/product3.webp",
             actionButtonTitle: "Learn More",
             actionButtonTrackName: "Direct Deposit Button Clicked" // Custom track name for the action button
