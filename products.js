@@ -4,60 +4,59 @@ const products = [
     {
         id: "1", // Don't edit the ID Number. Used for dynamic content organization
         basicInformation: {
-            title: "Open DailyPay Card",
-            subtitle: "",
+            title: "Segment Sloth Stuffed Animal",
+            subtitle: "$15.99",
             image: "assets/product1.webp",
-            actionButtonTitle: "Apply Now!",
-            actionButtonTrackName: "Apply Now Clicked" // Custom track name for the action button
+            actionButtonTitle: "View Product",
+            actionButtonTrackName: "Product Viewed" // Custom track name for the action button
         },
         productDetailsCard: {
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
             tags: ["No Fees!"],
             features: ["Feature 1", "Feature 2", "Feature 3"],
-            intentButtonLabel: "Apply",
-            intentButtonTrackName: "Application Started" // Custom track name for the intent button
+            intentButtonLabel: "Add to Cart",
+            intentButtonTrackName: "Product Added to Cart" // Custom track name for the intent button
         },
         conversionModal: {
-            convertButtonLabel: "Submit Application",
-            convertButtonTrackName: "Application Submitted", // Custom track name for the convert button
-            confirmationTrackName: "Application Completed" // Custom track name for viewing the confirmation page
+            convertButtonLabel: "Order",
+            convertButtonTrackName: "Order Submitted", // Custom track name for the convert button
+            confirmationTrackName: "Order Completed" // Custom track name for viewing the confirmation page
         },
         // Additional Properties used for track calls. Not exposed in website UI
         trackProperties: {
-            productType: "Financial Service",
-            userSegment: "Premium",
+            product: "Sloth Stuffed Animal",
+            color: "natural",
+            plush_level: "Premium",
             seasonalPromo: "Spring2024",
-            property4: "Value 4",
+            sku: "10720983",
             property5: "Value 5"
         }
     },
     {
         id: "2", // Don't edit the ID Number. Used for dynamic content organization
         basicInformation: {
-            title: "Transfer Funds",
-            subtitle: "Instantly Transfer to Venmo",
-            image: "assets/product2.webp",
-            actionButtonTitle: "Transfer",
-            actionButtonTrackName: "Transfer Button Clicked" // Custom track name for the action button
+            title: "Get a Product Demo",
+            subtitle: "",
+            image: "assets/product2.png",
+            actionButtonTitle: "Request Demo",
+            actionButtonTrackName: "Button Clicked" // Custom track name for the action button
         },
         productDetailsCard: {
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            tags: ["Most Popular", "Instantly Receive Funds"],
-            features: ["Amount: $100", "Fees: $2.99", "Total: $102.99"],
-            intentButtonLabel: "Transfer",
-            intentButtonTrackName: "Transfer Configuration Started" // Custom track name for the intent button
+            tags: ["See the value Segment brings to your tech stack!", "Tag 2"],
+            features: ["Feature 1", "Feature 2"],
+            intentButtonLabel: "Request Demo",
+            intentButtonTrackName: "Configured Demo Request" // Custom track name for the intent button
         },
         conversionModal: {
-            convertButtonLabel: "Begin Transfer",
-            convertButtonTrackName: "Transfer Initiated", // Custom track name for the convert button
-            confirmationTrackName: "Transfer Completed" // Custom track name for viewing the confirmation page
+            convertButtonLabel: "Submit Request",
+            convertButtonTrackName: "Demo Requested", // Custom track name for the convert button
+            confirmationTrackName: "Demo Confirmed" // Custom track name for viewing the confirmation page
         },
         trackProperties: {
-            productType: "Financial Service",
-            transfer_amount: 100,
-            fee_applied: true,
-            fee_amount: 2.99,
-            transfer_method: "Venmo",
+            productType: "Segment Demo",
+            time: "3:00pm ET",
+            notes: "N/A",
             delivery_window: "Instant"
         }
     },
@@ -115,7 +114,7 @@ const products = [
             transfer_amount: 100,
             fee_applied: false,
             fee_amount: null,
-            transfer_method: "DailyPay Card",
+            transfer_method: "Debit Card",
             delivery_window: "1 Business Day"
         }
     }
